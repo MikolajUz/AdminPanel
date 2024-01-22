@@ -1,12 +1,21 @@
+// Example in side-nav.component.ts
 import { Component } from '@angular/core';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-side-nav',
-  standalone: true,
-  imports: [],
   templateUrl: './side-nav.component.html',
-  styleUrl: './side-nav.component.scss'
+  styleUrls: ['./side-nav.component.scss'],
+  animations: [
+    trigger('transform', [
+      state('start', style({ transform: 'translateX(0)' })),
+    ]),
+  ],
 })
-export class SideNavComponent {
-
-}
+export class SideNavComponent {}
