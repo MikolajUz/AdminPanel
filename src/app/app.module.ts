@@ -21,6 +21,7 @@ import { SubpagesComponent } from './main/components/features/subpages/subpages.
 import { EventsComponent } from './main/components/features/events/events.component';
 import { SignInComponent } from './main/components/features/sign-in/sign-in.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,

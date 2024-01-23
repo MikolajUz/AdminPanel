@@ -17,17 +17,13 @@ export class SitesComponent implements OnInit {
   ngOnInit(): void {
     this.sitesData$ = this.apiService.getUserData();
     this.sitesData$.subscribe((data: UserData[]) => {
-      // Check if data is not null and has at least one element
       if (data && data.length > 0) {
         this.displayedColumns = ['id', ...Object.keys(data[0])];
       }
     });
   }
 
-  // Include 'id' in displayed columns
   getDisplayedColumns(): string[] {
-    // Exclude 'id' from the displayed columns
-    return this.displayedColumns.filter(column => column !== 'id');
+    return this.displayedColumns.filter((column) => column !== 'id');
   }
-  
 }

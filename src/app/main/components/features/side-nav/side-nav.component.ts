@@ -1,12 +1,5 @@
-// Example in side-nav.component.ts
 import { Component } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate,
-} from '@angular/animations';
+import { trigger, state, style } from '@angular/animations';
 
 @Component({
   selector: 'app-side-nav',

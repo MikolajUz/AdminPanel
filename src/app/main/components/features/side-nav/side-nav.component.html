@@ -1,12 +1,45 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <a mat-list-item routerLink="/sites">Sites</a>
-      <a mat-list-item routerLink="/users">Users</a>
-      <a mat-list-item routerLink="/sessions">Sessions</a>
-      <a mat-list-item routerLink="/subpages">Subpages</a>
-      <a mat-list-item routerLink="/events">Events</a>
-      <a mat-list-item routerLink="/signIn">Sign in</a>
+      <a mat-list-item routerLink="/sites">
+        <div class="html-wrapper">
+          <div class="symbol">
+            <i class="fa-solid fa-sitemap"></i> <span class="text">Sites</span>
+          </div>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/users">
+        <div class="html-wrapper">
+          <div class="symbol">
+            <i class="fa-solid fa-users"></i> <span class="text">Users</span>
+          </div>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/sessions">
+        <div class="html-wrapper">
+          <div class="symbol">&#9871; <span class="text">Sessions</span></div>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/subpages">
+        <div class="html-wrapper">
+          <div class="symbol">&#10064; <span class="text">Subpages</span></div>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/events">
+        <div class="html-wrapper">
+          <div class="symbol">&#9732; <span class="text">Events</span></div>
+        </div>
+      </a>
+
+      <a mat-list-item routerLink="/signIn">
+        <div class="html-wrapper">
+          <div class="symbol">&#10009; <span class="text">Sign in</span></div>
+        </div>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 

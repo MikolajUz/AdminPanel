@@ -1,9 +1,31 @@
-/* styles.css (or styles.scss) */
+@import "@fortawesome/fontawesome-free/css/all.css";
 
 .sidenav-container {
   height: 100%;
+  background-color: white;
 }
 
 mat-sidenav {
-  width: 200px;
+  width: 13rem;
+}
+
+.html-wrapper {
+  font-size: large;
+}
+
+a {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  padding: 0 0 0 1rem;
+}
+
+.symbol {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.text {
+  font-size: smaller;
+  font-weight: normal;
+  margin-left: 1rem;
 }
