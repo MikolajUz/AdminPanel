@@ -20,6 +20,7 @@ import { SessionsComponent } from './main/components/features/sessions/sessions.
 import { SubpagesComponent } from './main/components/features/subpages/subpages.component';
 import { EventsComponent } from './main/components/features/events/events.component';
 import { SignInComponent } from './main/components/features/sign-in/sign-in.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
@@ -37,6 +38,12 @@ const routes: Routes = [
     SideNavComponent,
     TabsComponent,
     TableComponent,
+    UsersComponent,
+    SitesComponent,
+    SessionsComponent,
+    SubpagesComponent,
+    EventsComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +53,7 @@ const routes: Routes = [
     MatListModule,
     MatTabsModule,
     MatTableModule,
+    MatPaginatorModule,
     CommonModule,
     RouterModule.forRoot(routes),
   ],

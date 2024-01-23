@@ -1,0 +1,16 @@
+#table-container {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 16px 0; // Adjust margin as needed
+}
+
+.mat-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.paginator-background{
+    background-color: white;
+    display: flex;
+    width: 100%;
+}
