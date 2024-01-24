@@ -22,6 +22,13 @@ import { EventsComponent } from './main/components/features/events/events.compon
 import { SignInComponent } from './main/components/features/sign-in/sign-in.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginComponent } from './main/components/features/sign-in/login/login.component';
+import { ForgotPasswordComponent } from './main/components/features/sign-in/forgot-password/forgot-password.component';
+import { CreateAccountComponent } from './main/components/features/sign-in/create-account/create-account.component';
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
@@ -30,6 +37,8 @@ const routes: Routes = [
   { path: 'subpages', component: SubpagesComponent },
   { path: 'events', component: EventsComponent },
   { path: 'signIn', component: SignInComponent },
+  { path: 'create-account', component: CreateAccountComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
 ];
 
 @NgModule({
@@ -45,6 +54,9 @@ const routes: Routes = [
     SubpagesComponent,
     EventsComponent,
     SignInComponent,
+    LoginComponent,
+    ForgotPasswordComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +70,10 @@ const routes: Routes = [
     MatPaginatorModule,
     CommonModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
   ],
   exports: [RouterModule],
   providers: [HttpClient],
