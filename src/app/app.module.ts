@@ -67,6 +67,7 @@ const routes: Routes = [
     MatListModule,
     MatTabsModule,
     MatTableModule,
+
     MatPaginatorModule,
     CommonModule,
     RouterModule.forRoot(routes),

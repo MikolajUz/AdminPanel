@@ -2,7 +2,8 @@
   <div id="table-container" class="mat-table-responsive">
     <table
       mat-table
-      [dataSource]="(sitesData$ | async) || []"
+      [dataSource]="(sitesData$ | async | 
+      slice: lowValue : highValue) || []"
       class="mat-elevation-z8"
     >
       <ng-container
@@ -26,7 +27,11 @@
 </div>
 <div class="paginator-wrapper">
   <mat-paginator
+    [length]="(sitesData$ | async)?.length"
+    [pageSize]="pageSize"
     [pageSizeOptions]="[5, 10, 25]"
     showFirstLastButtons
+    
+    (page)="handlePageEvent($event)"
   ></mat-paginator>
 </div>
