@@ -34,4 +34,11 @@ export class AuthService {
 
     return this.http.post(loginUrl, credentials);
   }
+  checkEmailInDatabase(email: string): Observable<any> {
+    // Adjust the URL and payload based on your backend API
+    const checkEmailUrl = `${this.apiUrl}/check-email`;
+    const payload = { email };
+
+    return this.http.post(checkEmailUrl, payload);
+  }
 }
