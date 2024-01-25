@@ -1,1 +1,68 @@
-<p>create-account works!</p>
+<div class="create-account-container">
+  <h2 class="title">Create your account</h2>
+
+  <form [formGroup]="createAccountForm" (ngSubmit)="createAccount()">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Email Address"
+        type="email"
+        autocomplete="current-email"
+      />
+      <mat-error *ngIf="createAccountForm.get('email')!.hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="createAccountForm.get('email')!.hasError('email')"
+        >Invalid email format</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        formControlName="password"
+        placeholder="Password"
+        type="password"
+        autocomplete="current-password"
+      />
+      <mat-error *ngIf="createAccountForm.get('password')!.hasError('required')"
+        >Password is required</mat-error
+      >
+      <mat-error
+        *ngIf="createAccountForm.get('password')!.hasError('minlength')"
+        >Password should be at least 8 characters long</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        formControlName="confirmPassword"
+        placeholder="Confirm Password"
+        type="password"
+        autocomplete="current-password"
+      />
+      <mat-error
+        *ngIf="createAccountForm.get('confirmPassword')!.hasError('required')"
+        >Confirmation is required</mat-error
+      >
+      <mat-error *ngIf="createAccountForm.hasError('passwordMismatch')"
+        >Passwords do not match</mat-error
+      >
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      class="create-account-button"
+    >
+      Create an account
+    </button>
+
+    <div class="already-have-account-link">
+      <p>Already got an account? <a routerLink="/signIn">Login here</a></p>
+    </div>
+  </form>
+</div>
