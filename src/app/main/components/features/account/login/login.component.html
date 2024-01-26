@@ -1,0 +1,46 @@
+<div class="login-container">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        formControlName="email"
+        placeholder="Email Address"
+        type="email"
+        autocomplete="current-email"
+      />
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
+        >Invalid email format</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        formControlName="password"
+        placeholder="Password"
+        type="password"
+        autocomplete="current-password"
+      />
+
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
+        >Password is required</mat-error
+      >
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Sign In</button>
+
+    <div class="forgot-password-link">
+      <a routerLink="/forgot-password">Forgot password?</a>
+    </div>
+
+    <div class="create-account-link">
+      <p>
+        You do not have an account?
+        <a routerLink="/create-account">Click here to create an account</a>
+      </p>
+    </div>
+  </form>
+</div>

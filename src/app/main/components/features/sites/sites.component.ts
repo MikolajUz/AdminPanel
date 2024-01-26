@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 import { Observable, map } from 'rxjs';
 import { UserData } from '../../../interfaces/userData.interface';
@@ -17,6 +17,7 @@ export class SitesComponent implements OnInit {
 
   constructor(private apiService: APIService) {}
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngOnInit(): void {
     this.apiData$ = this.apiService.getUserData();
     this.prepareDisplayedColumns();

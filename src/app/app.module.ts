@@ -19,9 +19,16 @@ import { SitesComponent } from './main/components/features/sites/sites.component
 import { SessionsComponent } from './main/components/features/sessions/sessions.component';
 import { SubpagesComponent } from './main/components/features/subpages/subpages.component';
 import { EventsComponent } from './main/components/features/events/events.component';
-import { SignInComponent } from './main/components/features/sign-in/sign-in.component';
+import { AccountComponent } from './main/components/features/account/account.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginComponent } from './main/components/features/account/login/login.component';
+import { ForgotPasswordComponent } from './main/components/features/account/forgot-password/forgot-password.component';
+import { CreateAccountComponent } from './main/components/features/account/create-account/create-account.component';
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
@@ -29,7 +36,9 @@ const routes: Routes = [
   { path: 'sessions', component: SessionsComponent },
   { path: 'subpages', component: SubpagesComponent },
   { path: 'events', component: EventsComponent },
-  { path: 'signIn', component: SignInComponent },
+  { path: 'login', component: AccountComponent },
+  { path: 'create-account', component: CreateAccountComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
 ];
 
 @NgModule({
@@ -44,7 +53,10 @@ const routes: Routes = [
     SessionsComponent,
     SubpagesComponent,
     EventsComponent,
-    SignInComponent,
+    AccountComponent,
+    LoginComponent,
+    ForgotPasswordComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,9 +67,14 @@ const routes: Routes = [
     MatListModule,
     MatTabsModule,
     MatTableModule,
+
     MatPaginatorModule,
     CommonModule,
     RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
   ],
   exports: [RouterModule],
   providers: [HttpClient],
