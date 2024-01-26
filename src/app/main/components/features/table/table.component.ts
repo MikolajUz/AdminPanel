@@ -20,14 +20,29 @@ export class TableComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+
+
+  scrollbar = false;
+
+  toggleScrollbar() {
+    this.scrollbar = !this.scrollbar;
+    console.log('scrollbar', this.scrollbar);
+  }
+
+
+
 
   handlePageEvent(event: PageEvent) {
     this.pageSize = event.pageSize;
