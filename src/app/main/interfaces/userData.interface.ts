@@ -1,5 +1,5 @@
 export interface UserData {
-  id: number;
+  id: string;
   column1: string;
   column2: string;
   column3: string;
