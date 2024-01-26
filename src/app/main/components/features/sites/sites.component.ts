@@ -17,7 +17,7 @@ export class SitesComponent implements OnInit {
 
   constructor(private apiService: APIService) {}
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   ngOnInit(): void {
     this.apiData$ = this.apiService.getUserData();
     this.prepareDisplayedColumns();
