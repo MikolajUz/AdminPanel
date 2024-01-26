@@ -1,0 +1,36 @@
+.sidenav-container {
+  height: 100%;
+  background-color: white;
+}
+
+mat-sidenav {
+  width: 13rem;
+}
+
+.html-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.symbol {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.text {
+  font-size: large;
+  font-weight: normal;
+  padding: 0.75rem;
+}
+
+.svg-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.25rem;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 1rem;
+}
