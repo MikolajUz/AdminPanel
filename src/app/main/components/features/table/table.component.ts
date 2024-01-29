@@ -5,11 +5,18 @@ import {
   OnDestroy,
   AfterViewInit,
   ElementRef,
-  ChangeDetectorRef,
-  HostListener,
+  ViewChild,
 } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
+import {
+  Observable,
+  ReplaySubject,
+  Subscription,
+  debounceTime,
+  fromEvent,
+  takeUntil,
+} from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 type T = any;
 
@@ -22,27 +29,37 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() tableData$!: Observable<T[]>;
   @Input() pageSize: number = 5;
   @Input() displayedColumns$!: Observable<string[]>;
-  @Input() displayedRows$!: Observable<string[]>;
 
-  lowValue = 0;
-  highValue: number = this.pageSize;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  dataSource = new MatTableDataSource<T>([]);
   scrollbar = false;
   isScrollbarVisible = false;
 
-  private destroy$ = new Subject<void>();
+  private destroy$ = new ReplaySubject<void>();
+  private resizeSubscription!: Subscription;
 
-  constructor(private el: ElementRef, private cdr: ChangeDetectorRef) {}
+  constructor(private el: ElementRef) {}
+
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.checkScrollbarVisibility();
-      this.cdr.detectChanges();
-    }, 0);
+    this.tableData$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+    });
+
+    this.resizeSubscription = fromEvent(window, 'resize')
+      .pipe(debounceTime(200), takeUntil(this.destroy$))
+      .subscribe(() => this.checkScrollbarVisibility());
+
+    setTimeout(() => this.checkScrollbarVisibility(), 0);
   }
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.destroy$.next();
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
     this.destroy$.complete();
   }
 
@@ -55,22 +72,9 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
       const tableWidth = table.clientWidth;
 
       this.isScrollbarVisible = tableWidth > containerWidth;
+      this.scrollbar = this.isScrollbarVisible;
+    } else {
+      console.error('Container or table not found');
     }
-  }
-
-  toggleScrollbar() {
-    this.scrollbar = !this.scrollbar;
-    this.checkScrollbarVisibility();
-  }
-
-  handlePageEvent(event: PageEvent) {
-    this.pageSize = event.pageSize;
-    this.lowValue = event.pageIndex * event.pageSize;
-    this.highValue = this.lowValue + event.pageSize;
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.checkScrollbarVisibility();
   }
 }
