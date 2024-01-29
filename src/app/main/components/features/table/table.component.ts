@@ -17,6 +17,7 @@ import {
 } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 type T = any;
 
@@ -31,6 +32,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() displayedColumns$!: Observable<string[]>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<T>([]);
   scrollbar = false;
@@ -45,6 +47,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
     this.tableData$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
 
     this.resizeSubscription = fromEvent(window, 'resize')
