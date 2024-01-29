@@ -1,6 +1,5 @@
 <div id="table-container" class="mat-table-responsive">
   <div class="content-wrapper">
-    <button mat-raised-button (click)="toggleScrollbar()">Toggle Scrollbar</button>
     <div
       id="table-container"
       class="mat-table-responsive"
@@ -41,5 +40,6 @@
       showFirstLastButtons
       (page)="handlePageEvent($event)"
     ></mat-paginator>
+    <button mat-raised-button *ngIf="isScrollbarVisible" (click)="toggleScrollbar()">Show more</button>
   </div>
 </div>
