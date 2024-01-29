@@ -72,7 +72,6 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
       const tableWidth = table.clientWidth;
 
       this.isScrollbarVisible = tableWidth > containerWidth;
-      this.scrollbar = this.isScrollbarVisible;
     } else {
       console.error('Container or table not found');
     }

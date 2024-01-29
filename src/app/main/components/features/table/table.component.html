@@ -9,6 +9,7 @@
         mat-table
         [dataSource]="dataSource"
         class="mat-elevation-z8"
+        matSort
       >
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -38,8 +39,13 @@
       [pageSize]="pageSize"
       [pageSizeOptions]="[5, 10, 25]"
       showFirstLastButtons
-      
     ></mat-paginator>
-    <button mat-raised-button *ngIf="isScrollbarVisible" (click)="scrollbar = !scrollbar">Show more</button>
+    <button
+      mat-raised-button
+      *ngIf="isScrollbarVisible"
+      (click)="scrollbar = !scrollbar"
+    >
+      Show more
+    </button>
   </div>
 </div>
