@@ -29,6 +29,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginComponent } from './main/components/features/account/login/login.component';
 import { ForgotPasswordComponent } from './main/components/features/account/forgot-password/forgot-password.component';
 import { CreateAccountComponent } from './main/components/features/account/create-account/create-account.component';
+import { MatSortModule } from '@angular/material/sort';
+
 
 const routes: Routes = [
   { path: 'users', component: UsersComponent },
@@ -67,7 +69,7 @@ const routes: Routes = [
     MatListModule,
     MatTabsModule,
     MatTableModule,
-
+    MatSortModule,
     MatPaginatorModule,
     CommonModule,
     RouterModule.forRoot(routes),
