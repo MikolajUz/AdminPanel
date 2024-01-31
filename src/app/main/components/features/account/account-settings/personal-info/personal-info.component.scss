@@ -1,0 +1,31 @@
+.account-settings-container {
+  width: 100%;
+  margin: auto;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  padding-left: 5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: calc(45% - 8px); // Adjust the width and gap as needed
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  gap: 16px; // Adjust the gap between fields as needed
+  flex-wrap: wrap;
+}
+
+mat-form-field {
+  width: 100%;
+}

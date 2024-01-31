@@ -40,4 +40,22 @@ export class AuthService {
 
     return this.http.post(checkEmailUrl, payload);
   }
+
+
+
+  checkCurrentPassword(currentPassword: string): Observable<any> {
+    const checkPasswordUrl = `${this.apiUrl}/check-password`;
+    const payload = { currentPassword };
+
+    return this.http.post(checkPasswordUrl, payload);
+  }
+
+  updatePassword(newPassword: string): Observable<any> {
+    const updatePasswordUrl = `${this.apiUrl}/update-password`;
+    const payload = { newPassword };
+
+    return this.http.post(updatePasswordUrl, payload);
+  }
+
+
 }

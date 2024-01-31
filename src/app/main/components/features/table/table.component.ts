@@ -54,7 +54,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(debounceTime(200), takeUntil(this.destroy$))
       .subscribe(() => this.checkScrollbarVisibility());
 
-    setTimeout(() => this.checkScrollbarVisibility(), 0);
+    setTimeout(() => this.checkScrollbarVisibility(), 100);
   }
 
   ngOnInit(): void {}
