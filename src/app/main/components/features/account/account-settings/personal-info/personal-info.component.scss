@@ -11,7 +11,7 @@
 }
 
 .half-width {
-  width: calc(45% - 8px); // Adjust the width and gap as needed
+  width: calc(45% - 8px); 
 }
 
 h2 {
@@ -22,7 +22,7 @@ h2 {
 
 .form-group {
   display: flex;
-  gap: 16px; // Adjust the gap between fields as needed
+  gap: 16px; 
   flex-wrap: wrap;
 }
 

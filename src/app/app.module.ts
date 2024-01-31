@@ -10,7 +10,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule, Routes } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
-import { TabsComponent } from './main/components/features/tabs/tabs.component';
 import { MatTableModule } from '@angular/material/table';
 import { TableComponent } from './main/components/features/table/table.component';
 import { CommonModule } from '@angular/common';
@@ -62,7 +61,6 @@ const routes: Routes = [
     AppComponent,
     MainComponent,
     SideNavComponent,
-    TabsComponent,
     TableComponent,
     UsersComponent,
     SitesComponent,

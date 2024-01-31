@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 import { Observable, map } from 'rxjs';
 import { UserData } from '../../../interfaces/userData.interface';
-import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-sites',
