@@ -45,6 +45,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.tableData$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
+      console.log('data', data);
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
