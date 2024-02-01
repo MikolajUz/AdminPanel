@@ -6,14 +6,17 @@
   border-bottom: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ 
 }
 
 .logo-container {
   flex-grow: 1;
+  
 }
 
 .logo-container img {
   max-height: 2.5rem;
+  cursor: pointer;
 }
 
 .buttons-container {
