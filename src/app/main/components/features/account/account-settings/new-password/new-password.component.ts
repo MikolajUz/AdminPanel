@@ -17,6 +17,7 @@ export class NewPasswordComponent {
     private snackBar: MatSnackBar
   ) {
     this.setPasswordForm = this.formBuilder.group({
+      username: [''],
       currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
