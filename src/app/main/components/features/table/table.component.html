@@ -19,7 +19,7 @@
         <ng-container *ngFor="let column of displayedColumns$ | async">
           <ng-container [matColumnDef]="column">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              {{ column === 'Creation_Date' ? 'Creation Date' : column }}
+              {{ column === "Creation_Date" ? "Creation Date" : column }}
             </th>
             <td mat-cell *matCellDef="let row">{{ row[column] }}</td>
           </ng-container>

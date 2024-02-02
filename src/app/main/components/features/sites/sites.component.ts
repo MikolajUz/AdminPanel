@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { APIService } from '../../../services/api.service';
+// sites.component.ts
+
 import { Observable, map } from 'rxjs';
 import { Sites } from './interfaces/sites.interface';
+import { Component, OnInit } from '@angular/core';
+import { APIService } from '../../../services/api.service';
 
 @Component({
   selector: 'app-sites',
@@ -17,25 +19,16 @@ export class SitesComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiData$ = this.apiService.getSitesData();
-    this.apiData$.subscribe((e) => console.log('sites', e));
-    this.prepareDisplayedColumns();
-    this.setupTableData();
+    this.prepareTableData();
   }
 
-  private prepareDisplayedColumns() {
-   this.apiData$.subscribe((data: Sites[]) => {
-      if (data && data.length > 0) {
-        this.displayedColumns$ = new Observable((observer) => {
-          let columns = ['ID', 'Name', 'Owner', 'Active', 'Creation_Date', 'Key'];
-          observer.next(columns);
-          observer.complete();
-        });
-      }
-   });
-  }
-  
+  private prepareTableData() {
+    this.displayedColumns$ = new Observable((observer) => {
+      let columns = ['ID', 'Name', 'Owner', 'Active', 'Creation_Date', 'Key'];
+      observer.next(columns);
+      observer.complete();
+    });
 
-  private setupTableData() {
     this.tableData$ = this.apiData$.pipe(
       map((data: Sites[]) => {
         if (data && data.length > 0) {
