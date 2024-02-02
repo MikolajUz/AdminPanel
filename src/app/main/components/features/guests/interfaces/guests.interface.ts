@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import * as phpUnserializeModule from 'phpunserialize';
+
+const phpUnserialize: any = phpUnserializeModule;
 
 export interface RawGuests {
   id: string;
@@ -17,14 +20,28 @@ export interface GuestsAPI {
   debug: any[];
 }
 
+interface EntryDataObject {
+  b: string;
+  w: string;
+  h: string;
+  wv: string;
+  wh: string;
+}
+
 export class Guests {
   constructor(
     public ID: string,
     public Name: string,
     public Website: string,
-    public Entry_Data: string,
-    public First_Visit_Date: string
+    public First_Visit_Date: string,
+    public Browser_Info: string,
+    public Width: string,
+    public Height: string,
+    public Width_Vp: string,
+    public Height_Vp: string
   ) {}
+
+  [key: string]: string;
 }
 
 @Injectable({
@@ -32,12 +49,18 @@ export class Guests {
 })
 export class GuestsAdapter {
   adapt(rawData: RawGuests): Guests {
+    const entryDataObject = phpUnserialize(rawData.an) as EntryDataObject; // Use phpUnserialize
+
     return new Guests(
       rawData.id,
       rawData.na,
       rawData.wi,
-      rawData.an,
-      rawData.da
+      rawData.da,
+      entryDataObject.b,
+      entryDataObject.w,
+      entryDataObject.h,
+      entryDataObject.wv,
+      entryDataObject.wh
     );
   }
 }
