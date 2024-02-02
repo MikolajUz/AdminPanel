@@ -28,9 +28,8 @@ type T = any;
 })
 export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() tableData$!: Observable<T[]>;
-  @Input() pageSize: number = 5;
   @Input() displayedColumns$!: Observable<string[]>;
-
+  @Input() pageSize: number = 5;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -41,9 +40,15 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   private destroy$ = new ReplaySubject<void>();
   private resizeSubscription!: Subscription;
 
+  displayedColumns: string[] = [];
+
   constructor(private el: ElementRef) {}
 
   ngAfterViewInit(): void {
+    this.displayedColumns$.pipe(takeUntil(this.destroy$)).subscribe((columns) => {
+      this.displayedColumns = columns;
+    });
+
     this.tableData$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;

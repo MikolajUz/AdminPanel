@@ -33,6 +33,7 @@ import { HeaderComponent } from './main/components/features/header/header.compon
 import { DashboardComponent } from './main/components/features/dashboard/dashboard.component';
 import { PersonalInfoComponent } from './main/components/features/account/account-settings/personal-info/personal-info.component';
 import { NewPasswordComponent } from './main/components/features/account/account-settings/new-password/new-password.component';
+import { GuestsComponent } from './main/components/features/guests/guests.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
       { path: 'subpages', component: SubpagesComponent },
       { path: 'events', component: EventsComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'guests', component: GuestsComponent },
       { path: 'account', component: AccountComponent },
     ],
   },
@@ -74,7 +76,8 @@ const routes: Routes = [
     HeaderComponent,
     DashboardComponent,
     PersonalInfoComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    GuestsComponent
   ],
   imports: [
     BrowserModule,

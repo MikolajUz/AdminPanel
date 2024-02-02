@@ -1,31 +1,23 @@
 import { Observable, map } from 'rxjs';
-import { Sites } from './interfaces/sites.interface';
+import { Guests } from './interfaces/guests.interface';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 
 @Component({
-  selector: 'app-sites',
-  templateUrl: './sites.component.html',
-  styleUrls: ['./sites.component.scss'],
+  selector: 'app-guests',
+  templateUrl: './guests.component.html',
+  styleUrl: './guests.component.scss',
 })
-export class SitesComponent implements OnInit {
-  apiData$!: Observable<Sites[]>;
+export class GuestsComponent implements OnInit {
+  apiData$!: Observable<Guests[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
-
-  customColumns: string[] = [
-    'ID',
-    'Name',
-    'Owner',
-    'Active',
-    'Creation Date',
-    'Key',
-  ];
+  customColumns = ['ID', 'Name', 'Website', 'Entry Data', 'First Visit Date'];
 
   constructor(private apiService: APIService) {}
 
   ngOnInit(): void {
-    this.apiData$ = this.apiService.getSitesData();
+    this.apiData$ = this.apiService.getGuestsData();
     this.prepareTableData();
   }
 
@@ -36,7 +28,7 @@ export class SitesComponent implements OnInit {
     });
 
     this.tableData$ = this.apiData$.pipe(
-      map((data: Sites[]) => {
+      map((data: Guests[]) => {
         if (data && data.length > 0) {
           const transformedData = data.map((user) => {
             const row: { [key: string]: string } = {};
