@@ -20,14 +20,6 @@ export interface GuestsAPI {
   debug: any[];
 }
 
-interface EntryDataObject {
-  b: string;
-  w: string;
-  h: string;
-  wv: string;
-  wh: string;
-}
-
 export class Guests {
   constructor(
     public ID: string,
@@ -49,7 +41,7 @@ export class Guests {
 })
 export class GuestsAdapter {
   adapt(rawData: RawGuests): Guests {
-    const entryDataObject = phpUnserialize(rawData.an) as EntryDataObject; // Use phpUnserialize
+    const entryDataObject = phpUnserialize(rawData.an); // Use phpUnserialize
 
     return new Guests(
       rawData.id,
