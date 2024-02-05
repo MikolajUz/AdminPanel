@@ -34,6 +34,7 @@ import { DashboardComponent } from './main/components/features/dashboard/dashboa
 import { PersonalInfoComponent } from './main/components/features/account/account-settings/personal-info/personal-info.component';
 import { NewPasswordComponent } from './main/components/features/account/account-settings/new-password/new-password.component';
 import { GuestsComponent } from './main/components/features/guests/guests.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const routes: Routes = [
@@ -97,6 +98,7 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatProgressSpinnerModule
   ],
   exports: [RouterModule],
   providers: [HttpClient],

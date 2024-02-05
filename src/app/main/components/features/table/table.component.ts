@@ -36,6 +36,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   dataSource = new MatTableDataSource<T>([]);
   scrollbar = false;
   isScrollbarVisible = true;
+  isLoading = true
 
   private destroy$ = new ReplaySubject<void>();
   private resizeSubscription!: Subscription;
@@ -53,6 +54,7 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false
     });
 
     this.resizeSubscription = fromEvent(window, 'resize')
