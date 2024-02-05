@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Guests } from './interfaces/guests.interface';
+import { Guests, GuestsAdapter } from './interfaces/guests.interface';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 import { TableService } from '../../../services/table.service';
@@ -13,6 +13,8 @@ export class GuestsComponent implements OnInit {
   apiData$!: Observable<Guests[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
+  endpoint: string = 'aguests';
+  propertyApiName: string = 'guests';
   customColumns: string[] = [
     'ID',
     'Name',
@@ -27,11 +29,16 @@ export class GuestsComponent implements OnInit {
 
   constructor(
     private apiService: APIService,
+    private guestsAdapter: GuestsAdapter,
     private tableService: TableService
   ) {}
 
   ngOnInit(): void {
-    this.apiData$ = this.apiService.getGuestsData();
+    this.apiData$ = this.apiService.getArrayData<Guests>(
+      this.endpoint,
+      this.guestsAdapter,
+      this.propertyApiName
+    );
     this.displayedColumns$ = this.tableService.prepareColumns(
       this.customColumns
     );

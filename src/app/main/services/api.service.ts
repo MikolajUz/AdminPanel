@@ -1,23 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map } from 'rxjs';
 import { UserData } from '../interfaces/userData.interface';
 import { UserAction } from '../interfaces/userAction.interface';
-import {
-  Sites,
-  SitesAPI,
-  SitesAdapter,
-} from '../components/features/sites/interfaces/sites.interface';
-import {
-  Guests,
-  GuestsAPI,
-  GuestsAdapter,
-} from '../components/features/guests/interfaces/guests.interface';
-import {
-  Sessions,
-  SessionsAPI,
-  SessionsAdapter,
-} from '../components/features/sessions/interfaces/sessions.interface';
+
+import { GenericAdapter, RawData } from '../interfaces/API.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,16 +13,8 @@ export class APIService {
   private apiUrl = 'https://anal.olgroup2.usermd.net/api';
   private users = 'userInfo';
   private actions = 'actions';
-  private sites = 'asites';
-  private guests = 'aguests';
-  private sessions = 'asessions';
 
-  constructor(
-    private http: HttpClient,
-    private sitesAdapter: SitesAdapter,
-    private guestsAdapter: GuestsAdapter,
-    private sessionsAdapter: SessionsAdapter
-  ) {}
+  constructor(private http: HttpClient) {}
 
   postUserData(postData: UserData): Observable<any> {
     const url = `${this.apiUrl}/${this.users}`;
@@ -46,45 +25,27 @@ export class APIService {
     const url = `${this.apiUrl}/${this.actions}`;
     return this.http.post(url, postData);
   }
-  getUserData(): Observable<UserData[]> {
-    const url = `http://localhost:3000/${this.users}`;
-    return this.http.get<UserData[]>(url);
-  }
-  getActionData(): Observable<UserAction[]> {
-    const url = `${this.apiUrl}/${this.actions}`;
-    return this.http.get<UserAction[]>(url);
-  }
-  getSitesData(): Observable<Sites[]> {
-    const url = `${this.apiUrl}/${this.sites}`;
-    return this.http
-      .get<SitesAPI>(url)
-      .pipe(
-        map((ApiSites) =>
-          ApiSites.sites.map((site) => this.sitesAdapter.adapt(site))
-        )
-      );
-  }
-  getGuestsData(): Observable<Guests[]> {
-    const url = `${this.apiUrl}/${this.guests}`;
-    return this.http
-      .get<GuestsAPI>(url)
-      .pipe(
-        map((ApiGuests) =>
-          ApiGuests.guests.map((site) => this.guestsAdapter.adapt(site))
-        )
-      );
-  }
 
-  getSessionsData(): Observable<Sessions[]> {
-    const url = `${this.apiUrl}/${this.sessions}`;
+  getArrayData<T>(
+    endpoint: string,
+    adapter: GenericAdapter<T>,
+    propertySelector: string
+  ): Observable<T[]> {
+    const url = `${this.apiUrl}/${endpoint}`;
     return this.http
-      .get<SessionsAPI>(url)
+      .get<any>(url)
       .pipe(
-        map((ApiSessions) =>
-          ApiSessions.sessions.map((session) =>
-            this.sessionsAdapter.adapt(session)
+        map((response) =>
+          response[propertySelector].map((rawData: RawData) =>
+            adapter.adapt(rawData)
           )
-        )
+        ),
+        catchError((error) => {
+   
+          console.error('API Error:', error);
+          throw error; 
+        })
       );
   }
+  
 }

@@ -1,5 +1,5 @@
 import { Observable, map } from 'rxjs';
-import { Sites } from './interfaces/sites.interface';
+import { Sites, SitesAdapter } from './interfaces/sites.interface';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 import { TableService } from '../../../services/table.service';
@@ -13,6 +13,8 @@ export class SitesComponent implements OnInit {
   apiData$!: Observable<Sites[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
+  endpoint: string = 'asites';
+  propertyApiName: string = 'sites';
 
   customColumns: string[] = [
     'ID',
@@ -25,11 +27,16 @@ export class SitesComponent implements OnInit {
 
   constructor(
     private apiService: APIService,
-    private tableService: TableService
+    private tableService: TableService,
+    private sitesAdapter:SitesAdapter
   ) {}
 
   ngOnInit(): void {
-    this.apiData$ = this.apiService.getSitesData();
+    this.apiData$ = this.apiService.getArrayData<Sites>(
+      this.endpoint,
+      this.sitesAdapter,
+      this.propertyApiName
+    );
     this.displayedColumns$ = this.tableService.prepareColumns(
       this.customColumns
     );

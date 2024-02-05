@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GenericAdapter } from '../../../../interfaces/API.interface';
 
 export interface RawSites {
   id: string;
@@ -42,8 +43,8 @@ function checkValue(argument: string): string {
 @Injectable({
   providedIn: 'root',
 })
-export class SitesAdapter {
-  adapt(rawData: RawSites): Sites {
+export class SitesAdapter extends GenericAdapter<Sites> {
+  override adapt(rawData: RawSites): Sites {
     return new Sites(
       rawData.id,
       rawData.na,

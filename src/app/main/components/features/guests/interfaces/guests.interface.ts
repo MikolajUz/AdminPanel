@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import * as phpUnserializeModule from 'phpunserialize';
-
+import { GenericAdapter, RawData } from '../../../../interfaces/API.interface';
 const phpUnserialize: any = phpUnserializeModule;
 
 export interface RawGuests {
   id: string;
-  an: string; // entry data
-  da: string; // first visit date
-  wi_c: string; // don't show
-  wi: string; // website
-  na: string; // name
-  lm: string; // don't show
-  cd: string; // don't show creation date
-  md: string; //don't show, modification date
+  an: string;
+  da: string;
+  wi_c: string;
+  wi: string;
+  na: string;
+  lm: string;
+  cd: string;
+  md: string;
 }
 
 export interface GuestsAPI {
@@ -39,9 +39,9 @@ export class Guests {
 @Injectable({
   providedIn: 'root',
 })
-export class GuestsAdapter {
-  adapt(rawData: RawGuests): Guests {
-    const entryDataObject = phpUnserialize(rawData.an); // Use phpUnserialize
+export class GuestsAdapter extends GenericAdapter<Guests> {
+  override adapt(rawData: RawGuests): Guests {
+    const entryDataObject = phpUnserialize(rawData.an);
 
     return new Guests(
       rawData.id,

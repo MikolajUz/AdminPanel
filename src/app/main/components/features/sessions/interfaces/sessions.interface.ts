@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as phpUnserializeModule from 'phpunserialize';
+import { GenericAdapter } from '../../../../interfaces/API.interface';
 
 const phpUnserialize: any = phpUnserializeModule;
 
@@ -38,8 +39,8 @@ export class Sessions {
 @Injectable({
   providedIn: 'root',
 })
-export class SessionsAdapter {
-  adapt(rawData: RawSessions): Sessions {
+export class SessionsAdapter extends GenericAdapter<Sessions> {
+  override adapt(rawData: RawSessions): Sessions {
     const entryDataObject = phpUnserialize(rawData.an);
     return new Sessions(
       rawData.id,

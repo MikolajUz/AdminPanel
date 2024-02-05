@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Sessions } from './interfaces/sessions.interface';
+import { Sessions, SessionsAdapter } from './interfaces/sessions.interface';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 import { TableService } from '../../../services/table.service';
@@ -9,10 +9,12 @@ import { TableService } from '../../../services/table.service';
   templateUrl: './sessions.component.html',
   styleUrls: ['./sessions.component.scss'],
 })
-export class SessionsComponent {
+export class SessionsComponent implements OnInit{
   apiData$!: Observable<Sessions[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
+  endpoint: string = 'asessions';
+  propertyApiName: string = 'sessions';
   customColumns: string[] = [
     'ID',
     'Name',
@@ -29,11 +31,16 @@ export class SessionsComponent {
 
   constructor(
     private apiService: APIService,
-    private tableService: TableService
+    private tableService: TableService,
+    private sessionsAdapter: SessionsAdapter
   ) {}
 
   ngOnInit(): void {
-    this.apiData$ = this.apiService.getSessionsData();
+    this.apiData$ = this.apiService.getArrayData<Sessions>(
+      this.endpoint,
+      this.sessionsAdapter,
+      this.propertyApiName
+    );
     this.displayedColumns$ = this.tableService.prepareColumns(
       this.customColumns
     );
