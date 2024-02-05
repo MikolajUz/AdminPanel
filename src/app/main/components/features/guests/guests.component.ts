@@ -1,4 +1,4 @@
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Guests } from './interfaces/guests.interface';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';

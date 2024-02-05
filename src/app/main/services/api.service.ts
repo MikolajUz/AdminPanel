@@ -3,8 +3,21 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { UserData } from '../interfaces/userData.interface';
 import { UserAction } from '../interfaces/userAction.interface';
-import { Sites,SitesAPI,SitesAdapter } from '../components/features/sites/interfaces/sites.interface';
-import { Guests,GuestsAPI, GuestsAdapter } from '../components/features/guests/interfaces/guests.interface';
+import {
+  Sites,
+  SitesAPI,
+  SitesAdapter,
+} from '../components/features/sites/interfaces/sites.interface';
+import {
+  Guests,
+  GuestsAPI,
+  GuestsAdapter,
+} from '../components/features/guests/interfaces/guests.interface';
+import {
+  Sessions,
+  SessionsAPI,
+  SessionsAdapter,
+} from '../components/features/sessions/interfaces/sessions.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +26,16 @@ export class APIService {
   private apiUrl = 'https://anal.olgroup2.usermd.net/api';
   private users = 'userInfo';
   private actions = 'actions';
-  private sites='asites'
-  private guests='aguests'
+  private sites = 'asites';
+  private guests = 'aguests';
+  private sessions = 'asessions';
 
-  constructor(private http: HttpClient, private sitesAdapter: SitesAdapter, private guestsAdapter: GuestsAdapter) {}
+  constructor(
+    private http: HttpClient,
+    private sitesAdapter: SitesAdapter,
+    private guestsAdapter: GuestsAdapter,
+    private sessionsAdapter: SessionsAdapter
+  ) {}
 
   postUserData(postData: UserData): Observable<any> {
     const url = `${this.apiUrl}/${this.users}`;
@@ -37,11 +56,35 @@ export class APIService {
   }
   getSitesData(): Observable<Sites[]> {
     const url = `${this.apiUrl}/${this.sites}`;
-    return this.http.get<SitesAPI>(url).pipe(map((ApiSites)=>ApiSites.sites.map(site=>this.sitesAdapter.adapt(site))))
-}
+    return this.http
+      .get<SitesAPI>(url)
+      .pipe(
+        map((ApiSites) =>
+          ApiSites.sites.map((site) => this.sitesAdapter.adapt(site))
+        )
+      );
+  }
   getGuestsData(): Observable<Guests[]> {
-  const url = `${this.apiUrl}/${this.guests}`;
-  return this.http.get<GuestsAPI>(url).pipe(map((ApiGuests)=>ApiGuests.guests.map(site=>this.guestsAdapter.adapt(site))))
-}
+    const url = `${this.apiUrl}/${this.guests}`;
+    return this.http
+      .get<GuestsAPI>(url)
+      .pipe(
+        map((ApiGuests) =>
+          ApiGuests.guests.map((site) => this.guestsAdapter.adapt(site))
+        )
+      );
+  }
 
+  getSessionsData(): Observable<Sessions[]> {
+    const url = `${this.apiUrl}/${this.sessions}`;
+    return this.http
+      .get<SessionsAPI>(url)
+      .pipe(
+        map((ApiSessions) =>
+          ApiSessions.sessions.map((session) =>
+            this.sessionsAdapter.adapt(session)
+          )
+        )
+      );
+  }
 }
