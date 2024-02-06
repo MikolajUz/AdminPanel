@@ -35,6 +35,11 @@ import { PersonalInfoComponent } from './main/components/features/account/accoun
 import { NewPasswordComponent } from './main/components/features/account/account-settings/new-password/new-password.component';
 import { GuestsComponent } from './main/components/features/guests/guests.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { GraphComponent } from './main/components/features/graph/graph.component';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+
 
 
 const routes: Routes = [
@@ -51,6 +56,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'guests', component: GuestsComponent },
       { path: 'account', component: AccountComponent },
+      { path: 'graph', component: GraphComponent },
     ],
   },
 
@@ -78,7 +84,8 @@ const routes: Routes = [
     DashboardComponent,
     PersonalInfoComponent,
     NewPasswordComponent,
-    GuestsComponent
+    GuestsComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +105,11 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatGridListModule,
+    CanvasJSAngularChartsModule
+  
   ],
   exports: [RouterModule],
   providers: [HttpClient],
