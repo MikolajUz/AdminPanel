@@ -13,7 +13,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { TableComponent } from './main/components/features/table/table.component';
 import { CommonModule } from '@angular/common';
-import { UsersComponent } from './main/components/features/users/users.component';
 import { SitesComponent } from './main/components/features/sites/sites.component';
 import { SessionsComponent } from './main/components/features/sessions/sessions.component';
 import { SubpagesComponent } from './main/components/features/subpages/subpages.component';
@@ -35,12 +34,10 @@ import { PersonalInfoComponent } from './main/components/features/account/accoun
 import { NewPasswordComponent } from './main/components/features/account/account-settings/new-password/new-password.component';
 import { GuestsComponent } from './main/components/features/guests/guests.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { GraphComponent } from './main/components/features/graph/graph.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-
-
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -48,7 +45,7 @@ const routes: Routes = [
     path: 'main',
     component: MainComponent,
     children: [
-      { path: 'users', component: UsersComponent },
+    
       { path: 'sites', component: SitesComponent },
       { path: 'sessions', component: SessionsComponent },
       { path: 'subpages', component: SubpagesComponent },
@@ -71,7 +68,7 @@ const routes: Routes = [
     MainComponent,
     SideNavComponent,
     TableComponent,
-    UsersComponent,
+
     SitesComponent,
     SessionsComponent,
     SubpagesComponent,
@@ -85,7 +82,7 @@ const routes: Routes = [
     PersonalInfoComponent,
     NewPasswordComponent,
     GuestsComponent,
-    GraphComponent
+    GraphComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,8 +105,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatCardModule,
     MatGridListModule,
-    CanvasJSAngularChartsModule
-  
+    CanvasJSAngularChartsModule,
   ],
   exports: [RouterModule],
   providers: [HttpClient],
