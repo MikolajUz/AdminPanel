@@ -1,6 +1,6 @@
 <div class="container">
   <app-graph
-    class="item"
+    class="graph"
     [title]="'Sites with largest guest number'"
     [axisX]="'Name'"
     [axisY]="'Guests'"
@@ -10,4 +10,28 @@
     [xProperty]="'Name'"
     [yProperty]="'Guest'"
   ></app-graph>
+  <app-graph
+  class="graph"
+  [title]="'Fastest loading pages'"
+  [axisX]="'Name'"
+  [axisY]="'Time'"
+  [endpoint]="'apages'"
+  [propertyApiName]="'pages'"
+  [adapter]="subpagesAdapter"
+  [xProperty]="'Website'"
+  [yProperty]="'Loading_Time'"
+  [showTopValues]="true"
+></app-graph>
+<app-graph
+class="graph"
+[title]="'Slowest loading pages'"
+[axisX]="'Name'"
+[axisY]="'Time'"
+[endpoint]="'apages'"
+[propertyApiName]="'pages'"
+[adapter]="subpagesAdapter"
+[xProperty]="'Website'"
+[yProperty]="'Loading_Time'"
+[showTopValues]="false"
+></app-graph>
 </div>

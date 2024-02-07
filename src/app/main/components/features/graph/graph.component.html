@@ -1,6 +1,16 @@
-<div *ngFor="let dataSource of chartData" class="chart-wrapper">
-  <canvasjs-chart
-    [options]="dataSource"
-    [styles]="{ width: '25rem', height: '20rem' }"
-  ></canvasjs-chart>
+<div *ngIf="loading" class="loading-spinner">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>
+
+<div *ngIf="!loading && !error">
+  <div *ngFor="let dataSource of chartData" class="chart-wrapper">
+    <canvasjs-chart
+      [options]="dataSource"
+      [styles]="{ width: '25rem', height: '20rem' }"
+    ></canvasjs-chart>
+  </div>
 </div>

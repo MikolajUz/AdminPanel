@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { SessionsAdapter,Sessions } from '../sessions/interfaces/sessions.interface';
+import { SessionsAdapter } from '../sessions/interfaces/sessions.interface';
+import { SubpagesAdapter } from '../subpages/interfaces/subpages.interface';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +11,7 @@ import { SessionsAdapter,Sessions } from '../sessions/interfaces/sessions.interf
 export class DashboardComponent {
 
   constructor(
-    public sessionsAdapter:SessionsAdapter
+    public sessionsAdapter:SessionsAdapter,
+    public subpagesAdapter:SubpagesAdapter
   ) {}
 }
