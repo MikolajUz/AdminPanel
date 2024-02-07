@@ -1,7 +1,27 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <a mat-list-item routerLink="/sites">
+      <a
+        mat-list-item
+        routerLink="/main/dashboard"
+        [class.active]="isActiveRoute('/main/dashboard')"
+      >
+        <div class="html-wrapper">
+          <div class="symbol"></div>
+
+          <div class="html-wrapper">
+            <div class="symbol">
+              &#10070; <span class="text">Dashboard</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/main/sites"
+        [class.active]="isActiveRoute('/main/sites')"
+      >
         <div class="html-wrapper">
           <div class="symbol">
             <i class="fa-solid fa-sitemap"></i>
@@ -22,7 +42,41 @@
         </div>
       </a>
 
-      <a mat-list-item routerLink="/users">
+      <a
+        mat-list-item
+        routerLink="/main/sessions"
+        [class.active]="isActiveRoute('/main/sessions')"
+      >
+        <div class="html-wrapper">
+          <div class="symbol">&#9871; <span class="text">Sessions</span></div>
+        </div>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/main/subpages"
+        [class.active]="isActiveRoute('/main/subpages')"
+      >
+        <div class="html-wrapper">
+          <div class="symbol">&#10064; <span class="text">Subpages</span></div>
+        </div>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/main/events"
+        [class.active]="isActiveRoute('/main/events')"
+      >
+        <div class="html-wrapper">
+          <div class="symbol">&#9732; <span class="text">Events</span></div>
+        </div>
+      </a>
+
+      <a
+        mat-list-item
+        routerLink="/main/guests"
+        [class.active]="isActiveRoute('/main/guests')"
+      >
         <div class="html-wrapper">
           <div class="symbol">
             <i class="fa-solid fa-sitemap"></i>
@@ -39,31 +93,17 @@
               />
             </svg>
           </div>
-          <span class="text">Users</span>
+          <span class="text">Guests</span>
         </div>
       </a>
 
-      <a mat-list-item routerLink="/sessions">
+      <a
+        mat-list-item
+        routerLink="/main/account"
+        [class.active]="isActiveRoute('/main/account')"
+      >
         <div class="html-wrapper">
-          <div class="symbol">&#9871; <span class="text">Sessions</span></div>
-        </div>
-      </a>
-
-      <a mat-list-item routerLink="/subpages">
-        <div class="html-wrapper">
-          <div class="symbol">&#10064; <span class="text">Subpages</span></div>
-        </div>
-      </a>
-
-      <a mat-list-item routerLink="/events">
-        <div class="html-wrapper">
-          <div class="symbol">&#9732; <span class="text">Events</span></div>
-        </div>
-      </a>
-
-      <a mat-list-item routerLink="/login">
-        <div class="html-wrapper">
-          <div class="symbol">&#10009; <span class="text">Log in</span></div>
+          <div class="symbol">&#10009; <span class="text">Account</span></div>
         </div>
       </a>
     </mat-nav-list>

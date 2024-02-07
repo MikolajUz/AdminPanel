@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { UserData } from '../../../interfaces/userData.interface';
+import { Sessions, SessionsAdapter } from './interfaces/sessions.interface';
+import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';
+import { TableService } from '../../../services/table.service';
 
 @Component({
   selector: 'app-sessions',
@@ -10,51 +10,43 @@ import { APIService } from '../../../services/api.service';
   styleUrls: ['./sessions.component.scss'],
 })
 export class SessionsComponent implements OnInit {
-  apiData$!: Observable<UserData[]>;
+  apiData$!: Observable<Sessions[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
+  endpoint: string = 'asessions';
+  propertyApiName: string = 'sessions';
+  customColumns: string[] = [
+    'ID',
+    'Name',
+    'Website',
+    'Creation Date',
+    'Guest',
+    'Identifier',
+    'Browser Info',
+    'Width',
+    'Height',
+    'Width Vp',
+    'Height Vp',
+  ];
 
-  constructor(private apiService: APIService) {}
+  constructor(
+    private apiService: APIService,
+    private tableService: TableService,
+    private sessionsAdapter: SessionsAdapter
+  ) {}
 
   ngOnInit(): void {
-    this.apiData$ = this.apiService.getUserData();
-    this.prepareDisplayedColumns();
-    this.setupTableData();
-  }
-
-  private prepareDisplayedColumns() {
-    this.apiData$.subscribe((data: UserData[]) => {
-      if (data && data.length > 0) {
-
-        this.displayedColumns$ = new Observable((observer) => {
-          const columns = Object.keys(data[0]).filter(
-            (column) => column !== 'id'
-          );
-          observer.next(columns);
-          observer.complete();
-        });
-      }
-    });
-  }
-
-  private setupTableData() {
-    this.tableData$ = this.apiData$.pipe(
-      map((data: UserData[]) => {
-        if (data && data.length > 0) {
-          const transformedData = data.map((user) => {
-            const row: { [key: string]: string } = {};
-            Object.keys(user).forEach((key) => {
-              if (key !== 'id') {
-                row[key] = (user as any)[key].toString();
-              }
-            });
-            return row;
-          });
-
-          return transformedData;
-        }
-        return [];
-      })
+    this.apiData$ = this.apiService.getArrayData<Sessions>(
+      this.endpoint,
+      this.sessionsAdapter,
+      this.propertyApiName
+    );
+    this.displayedColumns$ = this.tableService.prepareColumns(
+      this.customColumns
+    );
+    this.tableData$ = this.tableService.prepareTableData(
+      this.apiData$,
+      this.customColumns
     );
   }
 }

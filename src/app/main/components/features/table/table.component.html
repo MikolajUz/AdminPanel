@@ -5,6 +5,9 @@
       class="mat-table-responsive"
       [style.overflow-x]="scrollbar ? 'auto' : 'hidden'"
     >
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
       <table
         mat-table
         [dataSource]="dataSource"

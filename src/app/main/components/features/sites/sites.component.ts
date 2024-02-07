@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { APIService } from '../../../services/api.service';
 import { Observable, map } from 'rxjs';
-import { UserData } from '../../../interfaces/userData.interface';
-import { PageEvent } from '@angular/material/paginator';
+import { Sites, SitesAdapter } from './interfaces/sites.interface';
+import { Component, OnInit } from '@angular/core';
+import { APIService } from '../../../services/api.service';
+import { TableService } from '../../../services/table.service';
 
 @Component({
   selector: 'app-sites',
@@ -10,54 +10,39 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./sites.component.scss'],
 })
 export class SitesComponent implements OnInit {
-  
-  apiData$!: Observable<UserData[]>;
+  apiData$!: Observable<Sites[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
+  endpoint: string = 'asites';
+  propertyApiName: string = 'sites';
 
-  constructor(private apiService: APIService) {}
+  customColumns: string[] = [
+    'ID',
+    'Name',
+    'Owner',
+    'Active',
+    'Creation Date',
+    'Key',
+  ];
 
+  constructor(
+    private apiService: APIService,
+    private tableService: TableService,
+    private sitesAdapter: SitesAdapter
+  ) {}
 
   ngOnInit(): void {
-    this.apiData$ = this.apiService.getUserData();
-    this.prepareDisplayedColumns();
-    this.setupTableData();
-  }
-
-  private prepareDisplayedColumns() {
-    this.apiData$.subscribe((data: UserData[]) => {
-      if (data && data.length > 0) {
-
-        this.displayedColumns$ = new Observable((observer) => {
-          const columns = Object.keys(data[0]).filter(
-            (column) => column !== 'id'
-          );
-          observer.next(columns);
-          observer.complete();
-        });
-      }
-    });
-  }
-
-  private setupTableData() {
-    this.tableData$ = this.apiData$.pipe(
-      map((data: UserData[]) => {
-        if (data && data.length > 0) {
-          const transformedData = data.map((user) => {
-            const row: { [key: string]: string } = {};
-            Object.keys(user).forEach((key) => {
-              if (key !== 'id') {
-                row[key] = (user as any)[key].toString();
-              }
-            });
-            return row;
-          });
-
-          return transformedData;
-        }
-        return [];
-      })
+    this.apiData$ = this.apiService.getArrayData<Sites>(
+      this.endpoint,
+      this.sitesAdapter,
+      this.propertyApiName
+    );
+    this.displayedColumns$ = this.tableService.prepareColumns(
+      this.customColumns
+    );
+    this.tableData$ = this.tableService.prepareTableData(
+      this.apiData$,
+      this.customColumns
     );
   }
 }
-

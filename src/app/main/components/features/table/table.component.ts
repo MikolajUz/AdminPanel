@@ -28,33 +28,42 @@ type T = any;
 })
 export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() tableData$!: Observable<T[]>;
-  @Input() pageSize: number = 5;
   @Input() displayedColumns$!: Observable<string[]>;
-
+  @Input() pageSize: number = 5;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<T>([]);
   scrollbar = false;
   isScrollbarVisible = true;
+  isLoading = true;
 
   private destroy$ = new ReplaySubject<void>();
   private resizeSubscription!: Subscription;
 
+  displayedColumns: string[] = [];
+
   constructor(private el: ElementRef) {}
 
   ngAfterViewInit(): void {
+    this.displayedColumns$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((columns) => {
+        this.displayedColumns = columns;
+      });
+
     this.tableData$.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
 
     this.resizeSubscription = fromEvent(window, 'resize')
       .pipe(debounceTime(200), takeUntil(this.destroy$))
       .subscribe(() => this.checkScrollbarVisibility());
 
-    setTimeout(() => this.checkScrollbarVisibility(), 0);
+    setTimeout(() => this.checkScrollbarVisibility(), 100);
   }
 
   ngOnInit(): void {}

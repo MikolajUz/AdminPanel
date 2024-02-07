@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, state, style } from '@angular/animations';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -11,4 +12,10 @@ import { trigger, state, style } from '@angular/animations';
     ]),
   ],
 })
-export class SideNavComponent {}
+export class SideNavComponent {
+  constructor(private router: Router) {}
+
+  isActiveRoute(route: string): boolean {
+    return this.router.url.includes(route);
+  }
+}
