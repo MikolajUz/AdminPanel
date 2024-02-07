@@ -10,7 +10,7 @@ import { computeMsgId } from '@angular/compiler';
   templateUrl: './sessions.component.html',
   styleUrls: ['./sessions.component.scss'],
 })
-export class SessionsComponent implements OnInit{
+export class SessionsComponent implements OnInit {
   apiData$!: Observable<Sessions[]>;
   tableData$!: Observable<{ [key: string]: string }[]>;
   displayedColumns$!: Observable<string[]>;
@@ -49,6 +49,5 @@ export class SessionsComponent implements OnInit{
       this.apiData$,
       this.customColumns
     );
-    this.apiData$.subscribe(e=>console.log('SessionsDta' , e))
   }
 }

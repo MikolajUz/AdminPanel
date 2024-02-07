@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SessionsAdapter,Sessions } from '../sessions/interfaces/sessions.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
-  constructor() {}
+
+  constructor(
+    public sessionsAdapter:SessionsAdapter
+  ) {}
 }
