@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
-import * as phpUnserializeModule from 'phpunserialize';
 
-const phpUnserialize: any = phpUnserializeModule;
+interface wa {
+  e: string;
+  h: string;
+  ha: string;
+  w: string;
+  wh: string;
+  wv: string;
+  x: string;
+  y: string;
+}
 
 export interface RawEvents {
+  id: string;
   se: string;
   po: string;
   ro: string;
   go: string;
-  id: string;
-  wa: null;
-  da: string; // first visit date
-  //wi_c: string; // don't show
-  wi: string; // website
-  na: string; // name
-  //lm: string; // don't show
-  //cd: string; // don't show creation date
-  //md: string; //don't show, modification date
+  wi: string;
+  wa: wa | null;
+  da: string;
+  na: string;
 }
 
 export interface EventsAPI {
@@ -24,17 +28,17 @@ export interface EventsAPI {
   debug: any[];
 }
 
-export class Guests {
+export class Events {
   constructor(
     public ID: string,
     public Name: string,
     public Website: string,
-    public Date: string,
-    public Session: string,
     public Sub_Page: string,
     public Type: string,
+    public Value: string,
+    public Session: string,
     public Guest: string,
-    public Value: string
+    public Date: string
   ) {}
 
   [key: string]: string;
@@ -43,20 +47,20 @@ export class Guests {
 @Injectable({
   providedIn: 'root',
 })
-export class GuestsAdapter {
-  adapt(rawData: RawEvents): Guests {
-    const entryDataObject = phpUnserialize(rawData.na); // Use phpUnserialize
-    console.log('entryDataObject',entryDataObject)
-    return new Guests(
+export class EventsAdapter {
+  adapt(rawData: RawEvents): Events {
+    let wa = '';
+    rawData.wa ? (wa = rawData.wa.e) : null;
+    return new Events(
       rawData.id,
       rawData.na,
       rawData.wi,
-      rawData.da,
-      entryDataObject.b,
-      entryDataObject.w,
-      entryDataObject.h,
-      entryDataObject.wv,
-      entryDataObject.wh
+      rawData.po,
+      rawData.ro,
+      wa,
+      rawData.se,
+      rawData.go,
+      rawData.da
     );
   }
 }
