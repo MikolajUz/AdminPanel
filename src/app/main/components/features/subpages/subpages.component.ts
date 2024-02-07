@@ -8,7 +8,7 @@ import { TableService } from '../../../services/table.service';
   selector: 'app-subpages',
 
   templateUrl: './subpages.component.html',
-  styleUrl: './subpages.component.scss'
+  styleUrl: './subpages.component.scss',
 })
 export class SubpagesComponent implements OnInit {
   apiData$!: Observable<Subpages[]>;
@@ -24,13 +24,13 @@ export class SubpagesComponent implements OnInit {
     'Website',
     'Guest',
     'Visit Date',
-    'Loading Time'
+    'Loading Time',
   ];
 
   constructor(
     private apiService: APIService,
     private tableService: TableService,
-    private subpagesAdapter:SubpagesAdapter
+    private subpagesAdapter: SubpagesAdapter
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +48,3 @@ export class SubpagesComponent implements OnInit {
     );
   }
 }
-
- 

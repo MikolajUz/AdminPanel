@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
-import { UserData } from '../interfaces/userData.interface';
-import { UserAction } from '../interfaces/userAction.interface';
 
 import { GenericAdapter, RawData } from '../interfaces/API.interface';
 
@@ -16,15 +14,6 @@ export class APIService {
 
   constructor(private http: HttpClient) {}
 
-  postUserData(postData: UserData): Observable<any> {
-    const url = `${this.apiUrl}/${this.users}`;
-    return this.http.post(url, postData);
-  }
-
-  postAction(postData: UserAction[]): Observable<any> {
-    const url = `${this.apiUrl}/${this.actions}`;
-    return this.http.post(url, postData);
-  }
 
   getArrayData<T>(
     endpoint: string,

@@ -3,7 +3,6 @@ import { Sessions, SessionsAdapter } from './interfaces/sessions.interface';
 import { Component, OnInit } from '@angular/core';
 import { APIService } from '../../../services/api.service';
 import { TableService } from '../../../services/table.service';
-import { computeMsgId } from '@angular/compiler';
 
 @Component({
   selector: 'app-sessions',

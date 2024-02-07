@@ -28,7 +28,7 @@ export class SitesComponent implements OnInit {
   constructor(
     private apiService: APIService,
     private tableService: TableService,
-    private sitesAdapter:SitesAdapter
+    private sitesAdapter: SitesAdapter
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +46,3 @@ export class SitesComponent implements OnInit {
     );
   }
 }
-
- 
