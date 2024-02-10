@@ -9,11 +9,8 @@ import { GenericAdapter, RawData } from '../interfaces/API.interface';
 })
 export class APIService {
   private apiUrl = 'https://anal.olgroup2.usermd.net/api';
-  private users = 'userInfo';
-  private actions = 'actions';
 
   constructor(private http: HttpClient) {}
-
 
   getArrayData<T>(
     endpoint: string,
@@ -21,20 +18,16 @@ export class APIService {
     propertySelector: string
   ): Observable<T[]> {
     const url = `${this.apiUrl}/${endpoint}`;
-    return this.http
-      .get<any>(url)
-      .pipe(
-        map((response) =>
-          response[propertySelector].map((rawData: RawData) =>
-            adapter.adapt(rawData)
-          )
-        ),
-        catchError((error) => {
-   
-          console.error('API Error:', error);
-          throw error; 
-        })
-      );
+    return this.http.get<any>(url).pipe(
+      map((response) =>
+        response[propertySelector].map((rawData: RawData) =>
+          adapter.adapt(rawData)
+        )
+      ),
+      catchError((error) => {
+        console.error('API Error:', error);
+        throw error;
+      })
+    );
   }
-  
 }

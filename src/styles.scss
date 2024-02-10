@@ -2,10 +2,6 @@
 @use "sass:map";
 @include mat.core();
 
-html,
-body {
-  height: 100%;
-}
 body {
   margin: 0;
 

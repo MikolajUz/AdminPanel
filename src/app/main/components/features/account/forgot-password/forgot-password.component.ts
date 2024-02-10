@@ -34,7 +34,6 @@ export class ForgotPasswordComponent {
 
       this.authService.checkEmailInDatabase(emailControl.value).subscribe(
         (response) => {
-          // Handle successful response (email exists in the database)
         },
         (error) => {
           this.snackBar.open('Email not found in the database', 'OK', {

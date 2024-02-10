@@ -26,24 +26,13 @@ export class CreateAccountComponent {
   createAccount() {
     const { email, password, confirmPassword } = this.createAccountForm.value;
 
-    if (this.createAccountForm.get('email')!.hasError('email')) {
-      this.snackBar.open('Invalid email format', 'OK', { duration: 3000 });
-      return;
-    }
-
-    if (password.length < 8) {
-      this.snackBar.open(
-        'Password should be at least 8 characters long',
-        'OK',
-        {
-          duration: 3000,
-        }
-      );
-      return;
-    }
-
     if (password !== confirmPassword) {
       this.snackBar.open('Passwords do not match', 'OK', { duration: 3000 });
+      return;
+    }
+
+    if (this.createAccountForm.get('email')!.invalid) {
+      this.snackBar.open('Invalid email format', 'OK', { duration: 3000 });
       return;
     }
 
@@ -56,9 +45,21 @@ export class CreateAccountComponent {
         } else {
           this.authService.registerUser({ email, password }).subscribe(
             (registerResponse) => {
-              this.snackBar.open('Account created successfully', 'OK', {
-                duration: 3000,
-              });
+              this.authService.authenticateUser({ email, password }).subscribe(
+                (authResponse) => {
+                  localStorage.setItem('token', authResponse.token);
+                  this.snackBar.open(
+                    'Account created and authenticated successfully',
+                    'OK',
+                    {
+                      duration: 3000,
+                    }
+                  );
+                },
+                (authError) => {
+                  console.error('Authentication error:', authError);
+                }
+              );
             },
             (registerError) => {
               this.snackBar.open('Error creating account', 'OK', {

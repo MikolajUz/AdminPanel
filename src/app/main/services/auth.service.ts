@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = 'your_backend_api_url';
+  private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,26 @@ export class AuthService {
     const loginUrl = `${this.apiUrl}/login`;
     return this.http.post(loginUrl, loginData);
   }
+
+  authenticateUser(credentials: { email: string; password: string }): Observable<any> {
+    const loginUrl = `${this.apiUrl}/login`;
+
+    return this.http.post(loginUrl, credentials).pipe(
+      tap((response: any) => {
+        // Store JWT token in localStorage
+        localStorage.setItem(this.tokenKey, response.token);
+      })
+    );
+  }
+
+  // Method to include JWT token in HTTP headers
+  getAuthHeaders(): HttpHeaders {
+    const authToken = localStorage.getItem(this.tokenKey);
+    return new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+  }
+
+
+
 
   changePassword(passwordData: any): Observable<any> {
     const changePasswordUrl = `${this.apiUrl}/change-password`;

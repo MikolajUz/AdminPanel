@@ -9,6 +9,7 @@
     "fortawesome",
     "subpages",
     "unserialize",
-    "Unserialized"
+    "Unserialized",
+    "zxcvbn"
   ]
 }
