@@ -8,6 +8,12 @@ import { AuthService } from '../../../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+TestMEthodGET() {
+  this.authService.testGet()
+}
+TestMEthod() {
+this.authService.testPost()
+}
   loginForm: FormGroup;
   loginAttempts = 0;
   maxLoginAttempts = 5;

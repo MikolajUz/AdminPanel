@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  OnInit,
   OnDestroy,
   AfterViewInit,
   ElementRef,
@@ -26,7 +25,7 @@ type T = any;
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TableComponent implements OnDestroy, AfterViewInit {
   @Input() tableData$!: Observable<T[]>;
   @Input() displayedColumns$!: Observable<string[]>;
   @Input() pageSize: number = 5;
@@ -65,8 +64,6 @@ export class TableComponent implements OnInit, OnDestroy, AfterViewInit {
 
     setTimeout(() => this.checkScrollbarVisibility(), 100);
   }
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.complete();

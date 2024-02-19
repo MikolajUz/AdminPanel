@@ -27,8 +27,7 @@ export class GraphComponent implements AfterViewInit, OnDestroy {
   @Input() showTopValues: boolean = true;
   @Input() numberOfValuesToShow: number = 3;
 
-  chartOptions: any;
-  chartData: any[] = [];
+  chartData: any;
   loading: boolean = false;
   error: string | null = null;
   private subscription: Subscription | undefined;
@@ -76,7 +75,7 @@ export class GraphComponent implements AfterViewInit, OnDestroy {
             y: +data[this.yProperty as keyof typeof data],
           }));
 
-          this.chartOptions = {
+          this.chartData = {
             title: {
               text: this.title,
             },
@@ -100,8 +99,6 @@ export class GraphComponent implements AfterViewInit, OnDestroy {
               },
             ],
           };
-
-          this.chartData = [this.chartOptions];
 
           this.hideCreditLink();
         },

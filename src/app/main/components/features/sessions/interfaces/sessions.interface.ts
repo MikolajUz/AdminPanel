@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GenericAdapter } from '../../../../interfaces/API.interface';
-import { unserialize } from '../../../../services/unserializePhP';
+import { SerializationService } from '../../../../services/serialization.service'; // Import the SerializationService
 
 export interface RawSessions {
   id: string;
@@ -38,8 +38,12 @@ export class Sessions {
   providedIn: 'root',
 })
 export class SessionsAdapter extends GenericAdapter<Sessions> {
+  constructor(private serializationService: SerializationService) {
+    super();
+  }
+
   override adapt(rawData: RawSessions): Sessions {
-    const entryDataObject = unserialize(rawData.an);
+    const entryDataObject = this.serializationService.unserialize(rawData.an);
     return new Sessions(
       rawData.id,
       rawData.na,

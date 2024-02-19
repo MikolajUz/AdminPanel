@@ -7,10 +7,10 @@
 </div>
 
 <div *ngIf="!loading && !error">
-  <div *ngFor="let dataSource of chartData" class="chart-wrapper">
+  
     <canvasjs-chart
-      [options]="dataSource"
+      [options]="chartData"
       [styles]="{ width: '20rem', height: '16rem' }"
     ></canvasjs-chart>
-  </div>
+
 </div>
