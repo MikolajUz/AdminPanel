@@ -1,0 +1,16 @@
+<div *ngIf="loading" class="loading-spinner">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<div *ngIf="error" class="error-message">
+  {{ error }}
+</div>
+
+<div *ngIf="!loading && !error">
+  
+    <canvasjs-chart
+      [options]="chartData"
+      [styles]="{ width: '20rem', height: '16rem' }"
+    ></canvasjs-chart>
+
+</div>
