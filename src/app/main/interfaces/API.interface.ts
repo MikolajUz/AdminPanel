@@ -9,13 +9,7 @@ export interface RawData {
 })
 export class GenericAdapter<T> {
   adapt(rawData: RawData): T {
-    const adaptedData: any = {};
-
-    for (const key in rawData) {
-      if (rawData.hasOwnProperty(key)) {
-        adaptedData[key] = rawData[key];
-      }
-    }
+    const adaptedData: RawData = Object.assign({}, rawData);
 
     return adaptedData as T;
   }

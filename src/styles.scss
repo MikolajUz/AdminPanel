@@ -2,14 +2,10 @@
 @use "sass:map";
 @include mat.core();
 
-html,
-body {
-  height: 100%;
-}
 body {
   margin: 0;
 
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif; 
 }
 
 $my-primary: mat.define-palette(mat.$indigo-palette, 500);

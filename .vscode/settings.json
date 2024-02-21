@@ -7,8 +7,10 @@
     "canvasjs",
     "fontawesome",
     "fortawesome",
+    "simplehashed",
     "subpages",
     "unserialize",
-    "Unserialized"
+    "Unserialized",
+    "zxcvbn"
   ]
 }

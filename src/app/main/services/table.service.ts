@@ -6,10 +6,10 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 })
 export class TableService {
   prepareColumns(columns: string[]): Observable<string[]> {
-    let customColumnsSubject = new BehaviorSubject<string[]>([]);
+    let customColumnsSubject = new BehaviorSubject<string[]>([]); //normal Observable with initial value
     let customColumns$: Observable<string[]> =
-      customColumnsSubject.asObservable();
-    customColumnsSubject.next(columns);
+      customColumnsSubject.asObservable(); // asObservable=> subscribers cannot call next on it
+    customColumnsSubject.next(columns); // changing is only possible through customColumnsSubject
     return customColumns$;
   }
 
@@ -19,7 +19,7 @@ export class TableService {
   ): Observable<{ [key: string]: string }[]> {
     return data.pipe(
       map((items) => {
-        if (items && items.length > 0) {
+        if (items.length > 0) {
           return items.map((item) => {
             const row: { [key: string]: string } = {};
             Object.keys(item).forEach((key, index) => {

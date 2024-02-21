@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as phpUnserializeModule from 'phpunserialize';
 import { GenericAdapter, RawData } from '../../../../interfaces/API.interface';
-const phpUnserialize: any = phpUnserializeModule;
+import { SerializationService } from '../../../../services/serialization.service';
 
 export interface RawGuests {
   id: string;
@@ -40,9 +39,11 @@ export class Guests {
   providedIn: 'root',
 })
 export class GuestsAdapter extends GenericAdapter<Guests> {
+  constructor(private serializationService: SerializationService) {
+    super();
+  }
   override adapt(rawData: RawGuests): Guests {
-    const entryDataObject = phpUnserialize(rawData.an);
-
+    const entryDataObject = this.serializationService.unserialize(rawData.an);
     return new Guests(
       rawData.id,
       rawData.na,

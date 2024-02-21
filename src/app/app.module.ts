@@ -1,6 +1,7 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -45,7 +46,7 @@ const routes: Routes = [
     path: 'main',
     component: MainComponent,
     children: [
-    
+      { path: '', component: GraphComponent },
       { path: 'sites', component: SitesComponent },
       { path: 'sessions', component: SessionsComponent },
       { path: 'subpages', component: SubpagesComponent },
@@ -108,7 +109,10 @@ const routes: Routes = [
     CanvasJSAngularChartsModule,
   ],
   exports: [RouterModule],
-  providers: [HttpClient],
+  providers: [
+    HttpClient,
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
