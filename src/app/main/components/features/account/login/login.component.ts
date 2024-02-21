@@ -8,12 +8,6 @@ import { AuthService } from '../../../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-TestMEthodGET() {
-  this.authService.testGet()
-}
-TestMEthod() {
-this.authService.testPost()
-}
   loginForm: FormGroup;
   loginAttempts = 0;
   maxLoginAttempts = 5;
@@ -31,17 +25,36 @@ this.authService.testPost()
 
   login() {
     if (this.loginDisabled) {
-      return; 
+      return;
     }
 
     const { email, password } = this.loginForm.value;
 
+    //   if (email && password) {
+    //     this.authService.authenticateUser({ email, password }).subscribe(
+    //       (response) => {
+    //         this.loginAttempts = 0;
+    //       },
+    //       (error) => {
+    //         this.loginAttempts++;
+
+    //         if (this.loginAttempts >= this.maxLoginAttempts) {
+    //           this.loginDisabled = true;
+    //         }
+    //       }
+    //     );
+    //   }
+    // }
+
     if (email && password) {
-      this.authService.authenticateUser({ email, password }).subscribe(
+      const pass = password;
+      this.authService.login({ email, pass }).subscribe(
         (response) => {
+          console.log('response', response);
           this.loginAttempts = 0;
         },
         (error) => {
+          console.log('error', error);
           this.loginAttempts++;
 
           if (this.loginAttempts >= this.maxLoginAttempts) {
@@ -55,6 +68,6 @@ this.authService.testPost()
   enableLoginButton() {
     setTimeout(() => {
       this.loginDisabled = false;
-    }, 30000); 
+    }, 30000);
   }
 }

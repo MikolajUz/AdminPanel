@@ -39,7 +39,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GraphComponent } from './main/components/features/graph/graph.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-import { NgxPasswordStrengthModule } from 'ngx-password-strength';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },

@@ -9,6 +9,10 @@ mat-sidenav {
   height: 100%;
 }
 
+mat-sidenav-container mat-sidenav mat-nav-list {
+  padding: 0;
+}
+
 .html-wrapper {
   display: flex;
   align-items: center;

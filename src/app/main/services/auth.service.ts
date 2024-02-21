@@ -8,30 +8,24 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
   private apiUrl = 'https://anal.olgroup2.usermd.net/api/users';
   private signupSimple = '/signup-simple';
-  private logout = 'https://anal.olgroup2.usermd.net/api/users/logout'; // w sensie endpoint, wysyłąsz tylko GET bez danych
-  private register = 'https://anal.olgroup2.usermd.net/api/users/register';
+  private signupSimpleHashed = '/signup-simplehashed';
+  private signupHashedSalt = '/signup';
+  private register = '/register';
+  private logoutUrl = '/logout';
 
   constructor(private http: HttpClient) {}
 
-  testPost()  {
-    const base = 'analytics';
-    const url = 'abcdefghij';
-    console.log('test Method');
-     this.http.post('https://link1.castomo.com/set', { base, url }).subscribe(e=>console.log('post',e));
+  login(credentials: { email: string; pass: string }): Observable<any> {
+    const loginUrl = `${this.apiUrl}${this.signupSimple}`;
+    return this.http.post(loginUrl, credentials);
   }
-
-  testGet() {
-    const base = 'analytics';
-    const code = 'l18VYed0h9uV';
-
-    this.http
-      .post('https://link1.castomo.com/get', { base, code })
-      .subscribe((e) => console.log('get', e));
+  logout() {
+    const logoutUrl = `${this.apiUrl}${this.logoutUrl}`;
+    return this.http.get(logoutUrl);
   }
 
   registerUser(userData: any): Observable<any> {
-    const registerUrl = `${this.apiUrl}${this.signupSimple}`;
-    console.log('registerUrl', registerUrl);
+    const registerUrl = `${this.apiUrl}${this.register}`;
     return this.http.post(registerUrl, userData);
   }
 
@@ -71,11 +65,6 @@ export class AuthService {
     });
   }
 
-  login(credentials: { email: string; password: string }): Observable<any> {
-    const loginUrl = `${this.apiUrl}/login`;
-
-    return this.http.post(loginUrl, credentials);
-  }
   checkEmailInDatabase(email: string): Observable<any> {
     const checkEmailUrl = `${this.apiUrl}${this.signupSimple}`;
     console.log('checkEmailUrl', checkEmailUrl);
