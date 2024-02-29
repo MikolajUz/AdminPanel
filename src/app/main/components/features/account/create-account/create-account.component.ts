@@ -89,7 +89,7 @@ export class CreateAccountComponent {
     //   }
     // );
 
-    this.authService.registerUser({ email, pass, lang }).subscribe(
+    this.authService.registerHashedUser({ email, pass, lang }).subscribe(
       (registerResponse) => {
         console.log('registerResponse', registerResponse);
       },

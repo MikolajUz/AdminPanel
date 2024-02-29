@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -48,10 +50,11 @@ export class LoginComponent {
 
     if (email && password) {
       const pass = password;
-      this.authService.login({ email, pass }).subscribe(
+      this.authService.loginHashedSalt({ email, pass }).subscribe(
         (response) => {
           console.log('response', response);
           this.loginAttempts = 0;
+          this.router.navigate(['/main/dashboard']);
         },
         (error) => {
           console.log('error', error);

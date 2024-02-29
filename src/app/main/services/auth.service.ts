@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import sha1 from 'sha1';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,32 @@ export class AuthService {
     const loginUrl = `${this.apiUrl}${this.signupSimple}`;
     return this.http.post(loginUrl, credentials);
   }
+
+  loginHashed(credentials: { email: string; pass: string }): Observable<any> {
+    const doubleHashedPassword = sha1(sha1(credentials.pass));
+    const loginHashedUrl = `${this.apiUrl}${this.signupSimpleHashed}`;
+    console.log('loginHashedUrl', loginHashedUrl);
+    const hashedCredentials = {
+      email: credentials.email,
+      pass: doubleHashedPassword,
+    };
+    console.log('hashedCredentials', hashedCredentials);
+    return this.http.post(loginHashedUrl, hashedCredentials);
+  }
+
+  loginHashedSalt(credentials: { email: string; pass: string }): Observable<any> {
+    const salt='g63%RF*^&B*&N4&)*6(&46y2(_^b34gt2rt'
+    const hashedPassword = sha1(sha1(credentials.pass)+salt);
+    const loginHashedUrl = `${this.apiUrl}${this.signupHashedSalt}`;
+    console.log('loginHashedUrl', loginHashedUrl);
+    const hashedCredentials = {
+      email: credentials.email,
+      pass: hashedPassword,
+    };
+    console.log('hashedSaltCredentials', hashedCredentials);
+    return this.http.post(loginHashedUrl, hashedCredentials);
+  }
+
   logout() {
     const logoutUrl = `${this.apiUrl}${this.logoutUrl}`;
     return this.http.get(logoutUrl);
@@ -27,6 +54,21 @@ export class AuthService {
   registerUser(userData: any): Observable<any> {
     const registerUrl = `${this.apiUrl}${this.register}`;
     return this.http.post(registerUrl, userData);
+  }
+
+  registerHashedUser(credentials: {
+    email: string;
+    pass: string;
+    lang:string;
+  }): Observable<any> {
+    const hashedPassword = sha1(credentials.pass);
+    const registerUrl = `${this.apiUrl}${this.register}`;
+    const hashedCredentials = {
+      email: credentials.email,
+      pass: hashedPassword,
+      lang:credentials.lang
+    };
+    return this.http.post(registerUrl, hashedCredentials);
   }
 
   authenticateUser(credentials: {
@@ -90,4 +132,6 @@ export class AuthService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  
 }
