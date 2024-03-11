@@ -6,12 +6,18 @@
         <mat-form-field class="full-width">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" />
+          <mat-error *ngIf="accountForm.get('name')!.hasError('required')"
+            >Name is required</mat-error
+          >
         </mat-form-field>
       </div>
       <div class="half-width">
         <mat-form-field class="full-width">
           <mat-label>Lastname</mat-label>
           <input matInput formControlName="lastName" />
+          <mat-error *ngIf="accountForm.get('lastName')!.hasError('required')"
+            >Last name is required</mat-error
+          >
         </mat-form-field>
       </div>
     </div>
@@ -21,22 +27,34 @@
         <mat-form-field class="full-width">
           <mat-label>Phone number</mat-label>
           <input matInput formControlName="phoneNumber" />
+          <mat-error
+            *ngIf="accountForm.get('phoneNumber')!.hasError('required')"
+            >Phone number is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              accountForm.get('phoneNumber')!.hasError('invalidPhoneNumber')
+            "
+            >Please enter a valid phone number (9-15 digits).</mat-error
+          >
         </mat-form-field>
       </div>
       <div class="half-width">
         <mat-form-field class="full-width">
           <mat-label>Email address</mat-label>
           <input matInput formControlName="emailAddress" />
+          <mat-error
+            *ngIf="accountForm.get('emailAddress')!.hasError('required')"
+            >Email address is required</mat-error
+          >
+          <mat-error *ngIf="accountForm.get('emailAddress')!.hasError('email')"
+            >Wrong email format</mat-error
+          >
         </mat-form-field>
       </div>
     </div>
 
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      class="next-step-button"
-    >
+    <button mat-raised-button color="primary" type="submit">
       Save Changes
     </button>
   </form>

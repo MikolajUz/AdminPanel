@@ -39,6 +39,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { GraphComponent } from './main/components/features/graph/graph.component';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { AddSiteComponent } from './main/components/features/add-site/add-site.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -55,6 +58,7 @@ const routes: Routes = [
       { path: 'guests', component: GuestsComponent },
       { path: 'account', component: AccountComponent },
       { path: 'graph', component: GraphComponent },
+      { path: 'add_site', component: AddSiteComponent },
     ],
   },
 
@@ -84,6 +88,7 @@ const routes: Routes = [
     NewPasswordComponent,
     GuestsComponent,
     GraphComponent,
+    AddSiteComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +112,7 @@ const routes: Routes = [
     MatCardModule,
     MatGridListModule,
     CanvasJSAngularChartsModule,
+    MatSlideToggleModule
   ],
   exports: [RouterModule],
   providers: [

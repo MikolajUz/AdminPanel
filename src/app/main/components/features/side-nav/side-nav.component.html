@@ -7,13 +7,8 @@
         [class.active]="isActiveRoute('/main/dashboard')"
       >
         <div class="html-wrapper">
-          <div class="symbol"></div>
-
-          <div class="html-wrapper">
-            <div class="symbol">
-              &#10070; <span class="text">Dashboard</span>
-            </div>
-          </div>
+          <div class="symbol">&#10070;</div>
+          <span class="text">Dashboard</span>
         </div>
       </a>
 
@@ -23,9 +18,6 @@
         [class.active]="isActiveRoute('/main/sites')"
       >
         <div class="html-wrapper">
-          <div class="symbol">
-            <i class="fa-solid fa-sitemap"></i>
-          </div>
           <div class="svg-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,11 +36,24 @@
 
       <a
         mat-list-item
+        routerLink="/main/add_site"
+        [class.active]="isActiveRoute('/main/add_site')"
+      >
+        <div class="html-wrapper">
+          <div class="symbol">&#10010;</div>
+
+          <span class="text">Add site</span>
+        </div>
+      </a>
+
+      <a
+        mat-list-item
         routerLink="/main/sessions"
         [class.active]="isActiveRoute('/main/sessions')"
       >
         <div class="html-wrapper">
-          <div class="symbol">&#9871; <span class="text">Sessions</span></div>
+          <div class="symbol">&#9871;</div>
+          <span class="text">Sessions</span>
         </div>
       </a>
 
@@ -58,7 +63,8 @@
         [class.active]="isActiveRoute('/main/subpages')"
       >
         <div class="html-wrapper">
-          <div class="symbol">&#10064; <span class="text">Subpages</span></div>
+          <div class="symbol">&#10064;</div>
+          <span class="text">Subpages</span>
         </div>
       </a>
 
@@ -68,7 +74,8 @@
         [class.active]="isActiveRoute('/main/events')"
       >
         <div class="html-wrapper">
-          <div class="symbol">&#9732; <span class="text">Events</span></div>
+          <div class="symbol">&#9732;</div>
+          <span class="text">Events</span>
         </div>
       </a>
 
@@ -78,9 +85,6 @@
         [class.active]="isActiveRoute('/main/guests')"
       >
         <div class="html-wrapper">
-          <div class="symbol">
-            <i class="fa-solid fa-sitemap"></i>
-          </div>
           <div class="svg-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +107,8 @@
         [class.active]="isActiveRoute('/main/account')"
       >
         <div class="html-wrapper">
-          <div class="symbol">&#10009; <span class="text">Account</span></div>
+          <div class="symbol">&#9734;</div>
+          <span class="text">Account</span>
         </div>
       </a>
     </mat-nav-list>

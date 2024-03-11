@@ -4,7 +4,6 @@
   margin-top: 2rem;
   padding: 1.25rem;
   padding-left: 5rem;
-  
 }
 
 .full-width {
@@ -12,7 +11,11 @@
 }
 
 .half-width {
-  width: calc(45% - 16px);
+  width: calc(30% - 16px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 h2 {
@@ -30,3 +33,10 @@ h2 {
 mat-form-field {
   width: 100%;
 }
+.toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  zoom: 1.25;
+}
+

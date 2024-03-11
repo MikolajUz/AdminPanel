@@ -14,7 +14,8 @@ mat-sidenav-container mat-sidenav mat-nav-list {
 }
 
 .html-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
   align-items: center;
 }
 
