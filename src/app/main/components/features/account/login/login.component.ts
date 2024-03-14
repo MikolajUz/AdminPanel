@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+
+interface Response {
+  result: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -13,7 +18,7 @@ export class LoginComponent {
     this.authService.hello2();
   }
   hello() {
-    console.log('hello1')
+    console.log('hello1');
     this.authService.hello();
   }
   loginForm: FormGroup;
@@ -24,6 +29,7 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -42,18 +48,18 @@ export class LoginComponent {
     if (email && password) {
       const pass = password;
       this.authService.loginHashedSalt({ email, pass }).subscribe(
-        (response) => {
+        (response: Response) => {
           console.log('response', response);
-          this.loginAttempts = 0;
-          //this.router.navigate(['/main/dashboard']);
-        },
-        (error) => {
-          console.log('error', error);
-          this.loginAttempts++;
+          if (response.result === 'nouser') {
+            this.snackBar.open('Invalid email or password', 'OK', {
+              duration: 3000,
+            });
 
-          if (this.loginAttempts >= this.maxLoginAttempts) {
-            this.loginDisabled = true;
+            this.router.navigate(['/main/dashboard']);
           }
+        },
+        (error: any) => {
+          console.log('error', error);
         }
       );
     }
