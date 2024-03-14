@@ -1,21 +1,23 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 
 function phoneNumberValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    // Check if the control value is empty
     if (!control.value) {
-      return null; // Return null if the value is empty
+      return null;
     }
 
-    // Regular expression to match a valid phone number
     const phoneNumberPattern = /^[0-9]{9,15}$/;
 
-    // Check if the input value matches the pattern
     const valid = phoneNumberPattern.test(control.value);
 
-    // Return validation result
-    return valid ? null : { 'invalidPhoneNumber': { value: control.value } };
+    return valid ? null : { invalidPhoneNumber: { value: control.value } };
   };
 }
 @Component({

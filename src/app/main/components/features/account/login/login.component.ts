@@ -9,6 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  hello2() {
+    this.authService.hello2();
+  }
+  hello() {
+    console.log('hello1')
+    this.authService.hello();
+  }
   loginForm: FormGroup;
   loginAttempts = 0;
   maxLoginAttempts = 5;
@@ -32,29 +39,13 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.value;
 
-    //   if (email && password) {
-    //     this.authService.authenticateUser({ email, password }).subscribe(
-    //       (response) => {
-    //         this.loginAttempts = 0;
-    //       },
-    //       (error) => {
-    //         this.loginAttempts++;
-
-    //         if (this.loginAttempts >= this.maxLoginAttempts) {
-    //           this.loginDisabled = true;
-    //         }
-    //       }
-    //     );
-    //   }
-    // }
-
     if (email && password) {
       const pass = password;
       this.authService.loginHashedSalt({ email, pass }).subscribe(
         (response) => {
           console.log('response', response);
           this.loginAttempts = 0;
-          this.router.navigate(['/main/dashboard']);
+          //this.router.navigate(['/main/dashboard']);
         },
         (error) => {
           console.log('error', error);
@@ -66,11 +57,5 @@ export class LoginComponent {
         }
       );
     }
-  }
-
-  enableLoginButton() {
-    setTimeout(() => {
-      this.loginDisabled = false;
-    }, 30000);
   }
 }

@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 import sha1 from 'sha1';
+
+interface HelloResponse {
+  response: string; // Define the structure of the response object
+}
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +18,56 @@ export class AuthService {
   private signupHashedSalt = '/signup';
   private register = '/register';
   private logoutUrl = '/logout';
+  private addWebsite = '/add_website';
+  private remind = '/remind';
+  private sessionCookieName = 'PHPSESSID';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
+
+  hello() {
+    const sessionID = this.cookieService.get(this.sessionCookieName);
+    const options = {
+      withCredentials: true, 
+      headers: {
+        'Authorization': `Bearer ${sessionID}`
+      }
+    };
+    const urlHello = 'https://anal.olgroup2.usermd.net/api/hello';
+    console.log('options', options);
+    //return this.http.get(urlHello, { withCredentials: true }).subscribe(e=>console.log('hello',e));
+    //return this.http.get(urlHello, { withCredentials: true })
+    //return this.http.get(urlHello).subscribe((e) => console.log('hello', e));
+    return this.http.get<HelloResponse>(urlHello, options).pipe(
+      map(res => {
+        console.log('LOGGEDmap')
+        const loggedIn = res.response === 'ok';
+        if (loggedIn) {
+      
+          console.log('LOGGED')
+        }
+        return loggedIn;
+      })
+    ).subscribe(e=>console.log('hello',e));
+  }
+
+  
+
+  getSessionIdFromCookie(): string | null {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const [name, value] = cookie.trim().split('=');
+      if (name === 'PHPSESSID') {
+        return value;
+      }
+    }
+    return null;
+  }
+
+  hello2() {
+    const urlHello = 'https://anal.olgroup2.usermd.net/api/wow';
+    console.log('urlHello', urlHello);
+    this.http.get(urlHello).subscribe((e) => console.log('hello2', e));
+  }
 
   login(credentials: { email: string; pass: string }): Observable<any> {
     const loginUrl = `${this.apiUrl}${this.signupSimple}`;
@@ -33,16 +86,20 @@ export class AuthService {
     return this.http.post(loginHashedUrl, hashedCredentials);
   }
 
-  loginHashedSalt(credentials: { email: string; pass: string }): Observable<any> {
-    const salt='g63%RF*^&B*&N4&)*6(&46y2(_^b34gt2rt'
-    const hashedPassword = sha1(sha1(credentials.pass)+salt);
+  loginHashedSalt(credentials: {
+    email: string;
+    pass: string;
+  }): Observable<any> {
+    const salt = 'g63%RF*^&B*&N4&)*6(&46y2(_^b34gt2rt';
+    const hashedPassword = sha1(sha1(credentials.pass) + salt);
     const loginHashedUrl = `${this.apiUrl}${this.signupHashedSalt}`;
     console.log('loginHashedUrl', loginHashedUrl);
     const hashedCredentials = {
       email: credentials.email,
       pass: hashedPassword,
     };
-    console.log('hashedSaltCredentials', hashedCredentials);
+    console.log('hashedSaltCredentialss', hashedCredentials);
+    //this.hello();
     return this.http.post(loginHashedUrl, hashedCredentials);
   }
 
@@ -59,16 +116,25 @@ export class AuthService {
   registerHashedUser(credentials: {
     email: string;
     pass: string;
-    lang:string;
+    lang: string;
   }): Observable<any> {
     const hashedPassword = sha1(credentials.pass);
     const registerUrl = `${this.apiUrl}${this.register}`;
     const hashedCredentials = {
       email: credentials.email,
       pass: hashedPassword,
-      lang:credentials.lang
+      lang: credentials.lang,
     };
     return this.http.post(registerUrl, hashedCredentials);
+  }
+
+  addWebsiteMethod(websiteData: {
+    name: string;
+    url: string;
+    isActive: boolean;
+  }): Observable<any> {
+    const newWebsiteUrl = `${this.apiUrl}${this.addWebsite}`;
+    return this.http.post(newWebsiteUrl, websiteData);
   }
 
   authenticateUser(credentials: {
@@ -108,7 +174,7 @@ export class AuthService {
   }
 
   checkEmailInDatabase(email: string): Observable<any> {
-    const checkEmailUrl = `${this.apiUrl}${this.signupSimple}`;
+    const checkEmailUrl = `${this.apiUrl}${this.remind}`;
     console.log('checkEmailUrl', checkEmailUrl);
     const payload = { email };
     console.log('email', email);
@@ -132,6 +198,4 @@ export class AuthService {
       headers: this.getAuthHeaders(),
     });
   }
-
-  
 }

@@ -1,7 +1,13 @@
+.page-container{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .login-container {
   max-width: 400px;
-  margin: auto;
-  margin-top: 2rem;
   padding: 1.25rem;
   border: 1px solid #ccc;
   border-radius: 5px;

@@ -18,11 +18,14 @@ export class APIService {
     propertySelector: string
   ): Observable<T[]> {
     const url = `${this.apiUrl}/${endpoint}`;
+    const urlHello=`${this.apiUrl}/hello`;
+    this.http.post(urlHello,{})
     return this.http.get<any>(url).pipe(
       map((response) =>
         response[propertySelector].map((rawData: RawData) =>
           adapter.adapt(rawData)
         )
+
       ),
       catchError((error) => {
         console.error('API Error:', error);
