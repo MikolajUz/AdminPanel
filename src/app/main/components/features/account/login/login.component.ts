@@ -11,7 +11,7 @@ interface Response {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss','../account.scss'],
 })
 export class LoginComponent {
   hello2() {

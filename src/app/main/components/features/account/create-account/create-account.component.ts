@@ -6,7 +6,7 @@ import { AuthService } from '../../../../services/auth.service';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.scss'],
+  styleUrls: ['./create-account.component.scss','../account.scss'],
 })
 export class CreateAccountComponent {
   createAccountForm: FormGroup;

@@ -1,0 +1,36 @@
+.page-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content-container {
+  width: 40%;
+  padding: 3rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.link1 {
+  margin-top: 15px;
+}
+
+.link2 {
+  margin-top: 20px;
+}
+h2 {
+  font-size: xx-large;
+  font-weight: 500px;
+  padding-bottom: 1rem;
+}
+button {
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+}

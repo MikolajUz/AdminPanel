@@ -1,6 +1,6 @@
 <div class="page-container">
-<div class="create-account-container">
-  <h2 class="title">Create your account</h2>
+<div class="content-container">
+  <h2 >Create your account</h2>
 
   <form [formGroup]="createAccountForm" (ngSubmit)="createAccount()">
     <mat-form-field class="full-width">
@@ -57,12 +57,12 @@
       mat-raised-button
       color="primary"
       type="submit"
-      class="create-account-button"
+     
     >
       Create an account
     </button>
 
-    <div class="already-have-account-link">
+    <div class="link1">
       <p>Already got an account? <a routerLink="/login">Login here</a></p>
     </div>
   </form>

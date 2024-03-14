@@ -1,5 +1,5 @@
 <div class="page-container">
-  <div class="login-container">
+  <div class="content-container">
     <h2>Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-form-field class="full-width">
@@ -34,11 +34,11 @@
 
       <button mat-raised-button color="primary" type="submit">Log In</button>
 
-      <div class="forgot-password-link">
+      <div class="link2">
         <a routerLink="/forgot-password">Forgot password?</a>
       </div>
 
-      <div class="create-account-link">
+      <div class="link1">
         <p>
           You do not have an account?
           <a routerLink="/create-account">Click here to create an account</a>
