@@ -11,7 +11,7 @@ interface Response {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss','../account.scss'],
+  styleUrls: ['./login.component.scss', '../account.scss'],
 })
 export class LoginComponent {
   hello2() {
@@ -51,12 +51,13 @@ export class LoginComponent {
         (response: Response) => {
           console.log('response', response);
           if (response.result === 'nouser') {
-            this.snackBar.open('Invalid email or password', 'OK', {
-              duration: 3000,
-            });
-
-            this.router.navigate(['/main/dashboard']);
+            // this.snackBar.open('Invalid email or password', 'OK', {
+            //   duration: 3000,
+            // });
+            this.snackBar.open('Invalid email or password', 'OK');
           }
+          if (response.result === 'logged')
+            this.router.navigate(['/main/dashboard']);
         },
         (error: any) => {
           console.log('error', error);
