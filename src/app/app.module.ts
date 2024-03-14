@@ -41,6 +41,8 @@ import { GraphComponent } from './main/components/features/graph/graph.component
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { AddSiteComponent } from './main/components/features/add-site/add-site.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CustomSnackbarComponent } from './main/components/features/custom-snackbar/custom-snackbar.component';
+
 
 
 const routes: Routes = [
@@ -89,6 +91,8 @@ const routes: Routes = [
     GuestsComponent,
     GraphComponent,
     AddSiteComponent,
+    CustomSnackbarComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -112,7 +116,7 @@ const routes: Routes = [
     MatCardModule,
     MatGridListModule,
     CanvasJSAngularChartsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   exports: [RouterModule],
   providers: [

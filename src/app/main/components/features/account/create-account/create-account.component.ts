@@ -6,9 +6,11 @@ import { AuthService } from '../../../../services/auth.service';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.scss','../account.scss'],
+  styleUrls: ['./create-account.component.scss', '../account.scss'],
 })
 export class CreateAccountComponent {
+  snackbarMessage: string = '';
+  snackbarTime=2500
   createAccountForm: FormGroup;
 
   constructor(
@@ -25,23 +27,19 @@ export class CreateAccountComponent {
 
   createAccount() {
     const { email, password, confirmPassword } = this.createAccountForm.value;
-    const lang='en'
-    const pass=password
+    const lang = 'en';
+    const pass = password;
 
     if (password !== confirmPassword) {
-      this.snackBar.open('Passwords do not match', 'OK', { duration: 3000 });
-      console.log('Password match..');
+      this.snackbarMessage = 'Passwords do not match';
+      setTimeout(() => {
+        this.snackbarMessage = '';
+      }, this.snackbarTime);
       return;
     }
 
-    if (this.createAccountForm.get('email')!.invalid) {
-      console.log('Valid email..');
-      this.snackBar.open('Invalid email format', 'OK', { duration: 3000 });
-      return;
-    }
-    
     console.log('{ email, pass, lang }', { email, pass, lang });
- 
+
     // this.authService.checkEmailInDatabase(email).subscribe(
     //   (response) => {
     //     if (response.exists) {
@@ -94,10 +92,10 @@ export class CreateAccountComponent {
         console.log('registerResponse', registerResponse);
       },
       (registerError) => {
-        console.log('Error creating account',registerError);
-        this.snackBar.open('Error creating account', 'OK', {
-          duration: 3000,
-        });
+        this.snackbarMessage = 'Error creating account';
+        setTimeout(() => {
+          this.snackbarMessage = '';
+        }, 3000);
       }
     );
   }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 interface Response {
@@ -14,6 +13,9 @@ interface Response {
   styleUrls: ['./login.component.scss', '../account.scss'],
 })
 export class LoginComponent {
+  snackbarMessage: string = '';
+  snackbarTime = 2500;
+
   hello2() {
     this.authService.hello2();
   }
@@ -29,7 +31,6 @@ export class LoginComponent {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -51,10 +52,10 @@ export class LoginComponent {
         (response: Response) => {
           console.log('response', response);
           if (response.result === 'nouser') {
-            // this.snackBar.open('Invalid email or password', 'OK', {
-            //   duration: 3000,
-            // });
-            this.snackBar.open('Invalid email or password', 'OK');
+            this.snackbarMessage = 'Input data are not correct.';
+            setTimeout(() => {
+              this.snackbarMessage = '';
+            }, this.snackbarTime);
           }
           if (response.result === 'logged')
             this.router.navigate(['/main/dashboard']);

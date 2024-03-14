@@ -22,7 +22,6 @@ function phoneNumberValidator(): ValidatorFn {
 }
 @Component({
   selector: 'app-personal-info',
-
   templateUrl: './personal-info.component.html',
   styleUrl: './personal-info.component.scss',
 })
